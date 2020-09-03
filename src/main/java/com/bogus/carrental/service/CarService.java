@@ -2,6 +2,9 @@ package com.bogus.carrental.service;
 
 import com.bogus.carrental.database.CarRepository;
 import com.bogus.carrental.model.Car;
+import com.bogus.carrental.model.dtos.CarDto;
+import com.bogus.carrental.model.dtos.CarMapper;
+import com.bogus.carrental.model.dtos.CarUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +20,16 @@ public class CarService {
     private final CarRepository carRepository;
 
 
-    public List<Car> showAllCars() {
+    public List<Car> showAllCarsDetails() {
 
         return carRepository.findAll();
+
+    }
+
+
+    public List<CarDto> showAllCarsDtos() {
+
+        return CarMapper.mapToCarDtos(carRepository.findAll());
 
     }
 
@@ -44,31 +54,39 @@ public class CarService {
     }
 
 
-    public Car updateCar(Long id, Car car) {
-
-        Optional<Car> carById = carRepository.findById(id);
-        Car updatedCar = null;
-        if (carById.isPresent()) {
-            updatedCar = carById.get();
-            if (car.getBodyType() != null)
-                updatedCar.setBodyType(car.getBodyType());
-            if (car.getPayForDay() != null)
-                updatedCar.setPayForDay(car.getPayForDay());
-            if (car.getMileage() != null)
-                updatedCar.setMileage(car.getMileage());
-            if (car.getColor() != null)
-                updatedCar.setColor(car.getColor());
-            carRepository.save(updatedCar);
-        }
-        return updatedCar;
-
-    }
-
-
     public void deleteCarById(Long id) {
 
         carRepository.deleteById(id);
 
     }
+
+    public CarDto showCarDtoById(Long id) {
+        Optional<Car> carById = carRepository.findById(id);
+
+        if (carById.isPresent())
+            return CarMapper.mapToCarDto(carById.get());
+        else
+            throw new NoSuchElementException();
+    }
+
+
+    public Car updateCar(Long id, CarUpdateDto carUpdateDto) {
+
+        Optional<Car> carById = carRepository.findById(id);
+
+        Car updatedCar = carById.orElseThrow(NoSuchElementException::new);
+
+            if (carUpdateDto.getPayForDay() != null)
+                updatedCar.setPayForDay(carUpdateDto.getPayForDay());
+            if (carUpdateDto.getMileage() != null)
+                updatedCar.setMileage(carUpdateDto.getMileage());
+            if (carUpdateDto.getColor() != null)
+                updatedCar.setColor(carUpdateDto.getColor());
+            carRepository.save(updatedCar);
+
+        return updatedCar;
+
+    }
+
 }
 
