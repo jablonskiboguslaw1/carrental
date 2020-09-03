@@ -1,6 +1,8 @@
 package com.bogus.carrental.controllers;
 
 import com.bogus.carrental.model.Car;
+import com.bogus.carrental.model.dtos.CarDto;
+import com.bogus.carrental.model.dtos.CarUpdateDto;
 import com.bogus.carrental.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +16,30 @@ public class CarController {
 
     private final CarService carService;
 
-    @GetMapping("")
-    public List<Car> showAllCars() {
 
-        return carService.showAllCars();
+    @GetMapping("/service")
+    public List<Car> showAllCarsDetails() {
+
+        return carService.showAllCarsDetails();
+
+    }
+
+
+    @GetMapping("")
+    public List<CarDto> showAllCars() {
+
+        return carService.showAllCarsDtos();
 
     }
 
 
     @GetMapping("/details")
-    public Car showCarById(@RequestParam(name = "id") Long id) {
+    public CarDto showCarDtoById(@RequestParam(name = "id") Long id) {
 
-        return carService.showCarById(id);
+        return carService.showCarDtoById(id);
 
     }
+
 
     @PostMapping("")
     @ResponseBody
@@ -37,18 +49,28 @@ public class CarController {
 
     }
 
+
     @PatchMapping("")
     @ResponseBody
-    public Car updateCar(@RequestBody Car car, @RequestParam(name = "id") Long id) {
+    public Car updateCar(@RequestBody CarUpdateDto carUpdateDto, @RequestParam(name = "id") Long id) {
 
-        return carService.updateCar(id, car);
+        return carService.updateCar(id, carUpdateDto);
 
     }
+
 
     @DeleteMapping("")
     public void deleteCar(@RequestParam(name = "id") Long id) {
 
         carService.deleteCarById(id);
+
+    }
+
+
+    @GetMapping("/details/service")
+    public Car showCarById(@RequestParam(name = "id") Long id) {
+
+        return carService.showCarById(id);
 
     }
 
