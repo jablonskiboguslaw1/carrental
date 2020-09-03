@@ -19,4 +19,7 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 }
