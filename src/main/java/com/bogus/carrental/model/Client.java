@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,5 +28,5 @@ public class Client {
     private String street;
     private String postCode;
     @OneToMany(mappedBy = "client")
-    private List<Reservation> reservations;
+    private List<Reservation> reservations= new ArrayList<>();
 }
