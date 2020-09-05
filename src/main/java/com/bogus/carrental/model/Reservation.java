@@ -39,7 +39,8 @@ public class Reservation {
 
     private LocalDate reservationStart;
     private LocalDate reservationEnd;
-
+    @OneToOne()
+    private CarReturn carReturn;
 
     public Car getCar() {
         return car;

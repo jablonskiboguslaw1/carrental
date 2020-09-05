@@ -27,6 +27,18 @@ public class CarMapper {
         return cars.stream().map(car -> mapToCarDto(car)).collect(Collectors.toList());
 
     }
+    public static Car mapDtoToCar(CarDto car){
+        return Car.builder()
+                .id(car.getId())
+                .mark(car.getMark())
+                .model(car.getModel())
+                .bodyType(car.getBodyType())
+                .color(car.getColor())
+                .mileage(car.getMileage())
+                .payForDay(car.getPayForDay())
+                .productionYear(car.getProductionYear())
+                .build();
+    }
 
 
 
