@@ -46,10 +46,10 @@ public class CarService {
     }
 
 
-    public Car createCar(Car car) {
-
+    public CarDto createCar(CarDto carDto) {
+        Car car = CarMapper.mapDtoToCar(carDto);
         carRepository.save(car);
-        return car;
+        return CarMapper.mapToCarDto(car);
 
     }
 

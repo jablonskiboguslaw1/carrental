@@ -43,9 +43,9 @@ public class CarController {
 
     @PostMapping("")
     @ResponseBody
-    public Car addCar(@RequestBody Car car) {
+    public CarDto addCar(@RequestBody CarDto carDto) {
 
-        return carService.createCar(car);
+        return carService.createCar(carDto);
 
     }
 
