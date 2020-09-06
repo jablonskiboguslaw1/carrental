@@ -21,8 +21,6 @@ public class CarRental {
     private Employee employee;
     @CreationTimestamp
     private LocalDate dateOfRental;
-    @OneToOne
-    private Reservation reservation;
     private String comments;
 
 }

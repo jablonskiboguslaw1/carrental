@@ -45,7 +45,7 @@ public class CarController {
     @ResponseBody
     public CarDto addCar(@RequestBody CarDto carDto) {
 
-        return carService.createCar(carDto);
+        return carService.addCar(carDto);
 
     }
 

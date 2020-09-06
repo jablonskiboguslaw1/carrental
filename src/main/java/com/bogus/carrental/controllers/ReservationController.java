@@ -44,10 +44,10 @@ public class ReservationController {
 
     @PatchMapping("")
     @ResponseBody
-    public ReservationDto updateReservation(@RequestBody Reservation reservation,
+    public ReservationDto updateReservation(@RequestBody ReservationDto reservationDto,
                                             @RequestParam(name = "id") Long id) {
 
-        return reservationService.updateReservation(id, reservation);
+        return reservationService.updateReservation(id, reservationDto);
 
     }
 

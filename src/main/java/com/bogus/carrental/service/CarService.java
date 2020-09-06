@@ -46,7 +46,7 @@ public class CarService {
     }
 
 
-    public CarDto createCar(CarDto carDto) {
+    public CarDto addCar(CarDto carDto) {
         Car car = CarMapper.mapDtoToCar(carDto);
         carRepository.save(car);
         return CarMapper.mapToCarDto(car);
