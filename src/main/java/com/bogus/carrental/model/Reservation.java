@@ -42,7 +42,5 @@ public class Reservation {
     @OneToOne()
     private CarReturn carReturn;
 
-    public Car getCar() {
-        return car;
-    }
+
 }
