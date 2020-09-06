@@ -20,6 +20,7 @@ private ReservationMapper(){}
                         .dateOfReservation(reservation.getDateOfReservation())
                         .reservationStart(reservation.getReservationStart())
                         .reservationEnd(reservation.getReservationEnd())
+                        .client(ClientMapper.clientToDto(reservation.getClient()))
                         .car(CarMapper.mapToCarDto(reservation.getCar())).build();
     }
 

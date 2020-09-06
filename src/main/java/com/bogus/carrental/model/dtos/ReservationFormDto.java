@@ -1,11 +1,15 @@
 package com.bogus.carrental.model.dtos;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.time.LocalDate;
+@Builder
+@Data
+public class ReservationFormDto {
 
-public class ReservationAddDto {
 
 
-    private Long id;
     private LocalDate dateOfReservation;
     private Long car;
     private Long client;

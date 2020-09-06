@@ -1,21 +1,20 @@
 package com.bogus.carrental.model.dtos;
 
-
-import com.bogus.carrental.model.Reservation;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
-@Setter
 @Getter
+@Setter
+@AllArgsConstructor
 @Builder
-public class ClientDto {
+public class ClientFormDto {
 
-    private Long id;
     private String name;
     private String surname;
+    private String password;
     private String email;
     private String city;
     private String street;
