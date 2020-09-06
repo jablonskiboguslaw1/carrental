@@ -2,6 +2,8 @@ package com.bogus.carrental.service;
 
 import com.bogus.carrental.database.ReservationRepository;
 import com.bogus.carrental.model.Reservation;
+import com.bogus.carrental.model.dtos.CarMapper;
+import com.bogus.carrental.model.dtos.ClientMapper;
 import com.bogus.carrental.model.dtos.ReservationDto;
 import com.bogus.carrental.model.dtos.ReservationMapper;
 import lombok.RequiredArgsConstructor;
@@ -37,22 +39,24 @@ public class ReservationService {
     }
 
 
-    public ReservationDto updateReservation(Long id, Reservation reservation) {
+    public ReservationDto updateReservation(Long id, ReservationDto reservationDto) {
 
         Optional<Reservation> reservationById = reservationRepository.findById(id);
         Reservation updatedReservation = null;
 
         updatedReservation = reservationById.orElseThrow(NoSuchElementException::new);
-        if (reservation.getCar() != null)
-            updatedReservation.setCar((reservation).getCar());
-        if (reservation.getClient() != null)
-            updatedReservation.setClient((reservation).getClient());
-        if (reservation.getDateOfReservation() != null)
-            updatedReservation.setDateOfReservation(reservation.getDateOfReservation());
-        if (reservation.getReservationStart() != null)
-            updatedReservation.setReservationStart(reservation.getReservationStart());
-        if (reservation.getReservationEnd() != null)
-            updatedReservation.setReservationEnd(reservation.getReservationEnd());
+        if (reservationDto.getCar() != null)
+            updatedReservation.setCar(CarMapper.mapDtoToCar((reservationDto).getCar()));
+        if (reservationDto.getClient() != null)
+            updatedReservation.setClient(ClientMapper.dtoToClient((reservationDto).getClient()));
+        if (reservationDto.getDateOfReservation() != null)
+            updatedReservation.setDateOfReservation(reservationDto.getDateOfReservation());
+        if (reservationDto.getReservationStart() != null)
+            updatedReservation.setReservationStart(reservationDto.getReservationStart());
+        if (reservationDto.getReservationEnd() != null)
+            updatedReservation.setReservationEnd(reservationDto.getReservationEnd());
+        if(reservationDto.getCarRental()!=null)
+            updatedReservation.setCarRental(reservationDto.getCarRental());
         reservationRepository.save(updatedReservation);
 
         return ReservationMapper.mapToReservationDto(updatedReservation);
@@ -75,6 +79,9 @@ public class ReservationService {
                 reservationById.orElseThrow(NoSuchElementException::new));
 
 
+    }
+    public Reservation getReservationById(Long id){
+        return  reservationRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
 

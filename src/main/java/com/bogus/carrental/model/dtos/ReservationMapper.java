@@ -1,10 +1,6 @@
 package com.bogus.carrental.model.dtos;
 
-import com.bogus.carrental.model.Car;
 import com.bogus.carrental.model.Reservation;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReservationMapper {
 
@@ -21,7 +17,10 @@ private ReservationMapper(){}
                         .reservationStart(reservation.getReservationStart())
                         .reservationEnd(reservation.getReservationEnd())
                         .client(ClientMapper.clientToDto(reservation.getClient()))
-                        .car(CarMapper.mapToCarDto(reservation.getCar())).build();
+                        .car(CarMapper.mapToCarDto(reservation.getCar()))
+                        .carRental(reservation.getCarRental())
+                        .carReturn(reservation.getCarReturn())
+                        .build();
     }
 
 

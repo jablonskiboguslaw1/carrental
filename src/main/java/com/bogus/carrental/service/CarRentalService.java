@@ -2,8 +2,11 @@ package com.bogus.carrental.service;
 
 import com.bogus.carrental.database.CarRentalRepository;
 import com.bogus.carrental.model.CarRental;
+import com.bogus.carrental.model.Reservation;
+import com.bogus.carrental.model.dtos.ReservationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,14 +15,17 @@ import java.util.List;
 public class CarRentalService {
 
     private final CarRentalRepository carRentalRepository;
+    private final ReservationService reservationService;
 
     public List<CarRental> findAll() {
 
         return carRentalRepository.findAll();
     }
+@Transactional
+    public CarRental makeRental(CarRental carRental, Long reservationId) {
+    Reservation reservationById = reservationService.getReservationById(reservationId);
+    reservationById.setCarRental(carRental);
 
-    public CarRental makeRental(CarRental carRental) {
-        carRentalRepository.save(carRental);
         return carRental;
     }
 

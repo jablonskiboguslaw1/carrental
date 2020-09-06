@@ -1,6 +1,5 @@
 package com.bogus.carrental.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
@@ -21,7 +20,6 @@ import java.time.LocalDate;
 public class Reservation {
 
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,8 +38,12 @@ public class Reservation {
 
     private LocalDate reservationStart;
     private LocalDate reservationEnd;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="return_id")
     private CarReturn carReturn;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rental_id")
+    private CarRental carRental;
 
 
 }

@@ -14,6 +14,7 @@ public class CarRentalController {
 
     private final CarRentalService carRentalService;
 
+
     @GetMapping("/service")
     public List<CarRental> getAllRental(){
 
@@ -27,13 +28,15 @@ public class CarRentalController {
     }
 
 
-    @PostMapping
+    @PostMapping("")
     @ResponseBody
-    public CarRental makeRental(@RequestBody CarRental carRental){
-        return  carRentalService.makeRental(carRental);
+    public CarRental makeRental(@RequestBody CarRental carRental, @RequestParam Long reservationId){
+
+
+        return  carRentalService.makeRental(carRental, reservationId);
 
     }
-    @DeleteMapping
+    @DeleteMapping("")
     public boolean deleteRentalById(@RequestParam Long id){
         return carRentalService.deleteRentalById(id);
     }

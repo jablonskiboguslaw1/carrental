@@ -22,8 +22,6 @@ public class CarReturn {
     private Employee employee;
     @CreationTimestamp
     private LocalDate dateOfReturn;
-    @OneToOne()
-    private Reservation reservation;
     private String comments;
     private double additionalPayments;
 
