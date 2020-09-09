@@ -7,10 +7,13 @@ import com.bogus.carrental.model.dtos.CarMapper;
 import com.bogus.carrental.model.dtos.CarUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +21,7 @@ public class CarService {
 
 
     private final CarRepository carRepository;
-
+private final DepartmentService departmentService;
 
     public List<Car> showAllCarsDetails() {
 
@@ -87,6 +90,27 @@ public class CarService {
         return updatedCar;
 
     }
+@Transactional
+    public Car setCarDepartment(Long id, Long car) {
+        Car updatedCar = carRepository.findById(car).orElseThrow(NoSuchElementException::new);
+        updatedCar.setDepartment(departmentService.findById(id));
+        return updatedCar;
+    }
 
+    public List<CarDto> showAllCarsDtosByDepartment(Long id) {
+      return   carRepository.findCarsByDepartment(id).stream().map(CarMapper::mapToCarDto).collect(Collectors.toList());
+
+    }
+
+    public List<Car> showAllCarsAvailable(LocalDate start1, LocalDate end1) {
+
+        return carRepository.findAllAvailableCars().stream().filter(
+                car -> car.getStatuses().stream().noneMatch(
+                        carStatus ->
+                                ((carStatus.getStartDate().isBefore(end1)) &&
+                                        (carStatus.getEndDate().isAfter(start1)))))
+                .collect(Collectors.toList());
+
+    }
 }
 
