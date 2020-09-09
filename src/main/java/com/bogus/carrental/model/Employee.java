@@ -24,6 +24,9 @@ public class Employee {
     List<CarRental> rentals;
     @OneToMany(mappedBy = "employee")
     List<CarReturn> returns;
+    private String name;
+    private String surname;
+
     @Enumerated (EnumType.STRING)
     private Position position;
    @ManyToOne

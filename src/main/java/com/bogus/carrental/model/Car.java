@@ -30,12 +30,11 @@ public class Car {
     private Double payForDay;
     @OneToMany(mappedBy = "car")
 
+
     private List<Reservation> reservations;
     @OneToMany(mappedBy = "car")
     private List<CarStatus> statuses;
 
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
+    @ManyToOne
+    private Department department;
 }

@@ -16,7 +16,12 @@ public class Department {
     @Id
     @GeneratedValue
     private Long Id;
-    @OneToMany
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
+
+    @OneToMany(mappedBy = "department")
+    private List<Car> cars;
+    private String name;
+    private String city;
 
 }
