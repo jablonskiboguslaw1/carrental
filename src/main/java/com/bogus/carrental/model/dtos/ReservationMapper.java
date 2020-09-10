@@ -18,8 +18,8 @@ private ReservationMapper(){}
                         .reservationEnd(reservation.getReservationEnd())
                         .client(ClientMapper.clientToDto(reservation.getClient()))
                         .car(CarMapper.mapToCarDto(reservation.getCar()))
-                        .carRental(reservation.getCarRental())
-                        .carReturn(reservation.getCarReturn())
+                       .carRental(CarRentalMapper.mapToDto(reservation.getCarRental()))
+                       .carReturn(CarReturnMapper.mapToDto(reservation.getCarReturn()))
                         .build();
     }
 

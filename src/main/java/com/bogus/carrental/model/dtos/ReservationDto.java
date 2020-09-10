@@ -1,12 +1,9 @@
 package com.bogus.carrental.model.dtos;
 
-import com.bogus.carrental.model.CarRental;
-import com.bogus.carrental.model.CarReturn;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.OneToOne;
 import java.time.LocalDate;
 @Getter
 @Setter
@@ -20,6 +17,6 @@ public class ReservationDto {
     private ClientDto client;
     private LocalDate reservationStart;
     private LocalDate reservationEnd;
-    private CarReturn carReturn;
-    private CarRental carRental;
+   private CarReturnDto carReturn;
+    private CarRentalDto carRental;
 }

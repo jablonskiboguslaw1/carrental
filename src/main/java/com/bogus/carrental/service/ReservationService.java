@@ -55,8 +55,6 @@ public class ReservationService {
             updatedReservation.setReservationStart(reservationDto.getReservationStart());
         if (reservationDto.getReservationEnd() != null)
             updatedReservation.setReservationEnd(reservationDto.getReservationEnd());
-        if(reservationDto.getCarRental()!=null)
-            updatedReservation.setCarRental(reservationDto.getCarRental());
         reservationRepository.save(updatedReservation);
 
         return ReservationMapper.mapToReservationDto(updatedReservation);
