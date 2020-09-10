@@ -1,6 +1,7 @@
 package com.bogus.carrental.controllers;
 
 import com.bogus.carrental.model.Employee;
+import com.bogus.carrental.model.dtos.EmployeeDto;
 import com.bogus.carrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class EmployeeController {
 
 
     @GetMapping
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeDto> getAllEmployees() {
         return employeeService.findAll();
 
     }
@@ -28,18 +29,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/department")
-    List<Employee> getEmployeesByDepartmentId(@RequestParam Long id) {
+    List<EmployeeDto> getEmployeesByDepartmentId(@RequestParam Long id) {
         return employeeService.findAllByDepartmentId(id);
     }
 
     @PostMapping
     @ResponseBody
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
+    public EmployeeDto addEmployee(@RequestBody EmployeeDto employeeDto) {
+        return employeeService.addEmployee(employeeDto);
     }
 
     @PatchMapping
-    public Employee chooseManager(@RequestParam Long id) {
+    public EmployeeDto chooseManager(@RequestParam Long id) {
         return employeeService.chooseManager(id);
     }
 
