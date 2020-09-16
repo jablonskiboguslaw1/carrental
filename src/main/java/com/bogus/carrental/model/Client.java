@@ -14,14 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Client {
+public class Client extends User{
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
-    private String surname;
-    private String password;
+
     private String email;
     private String city;
     private String street;

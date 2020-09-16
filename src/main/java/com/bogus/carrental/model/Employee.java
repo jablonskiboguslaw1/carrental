@@ -16,16 +16,12 @@ import java.util.List;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Employee extends User{
+
     @OneToMany(mappedBy = "employee")
     List<CarRental> rentals;
     @OneToMany(mappedBy = "employee")
     List<CarReturn> returns;
-    private String name;
-    private String surname;
 
     @Enumerated (EnumType.STRING)
     private Position position;
