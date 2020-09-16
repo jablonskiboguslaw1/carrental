@@ -27,26 +27,28 @@ public class ClientMapper {
 
 
     public static Client dtoToClient(ClientDto clientDto){
-       return Client.builder()
-                .id(clientDto.getId())
-                .name(clientDto.getName())
-                .surname(clientDto.getSurname())
+        Client build = Client.builder()
+
                 .city(clientDto.getCity())
                 .postCode(clientDto.getPostCode())
                 .street(clientDto.getStreet())
                 .build();
+        build.setSurname(clientDto.getSurname());
+        build.setName(clientDto.getName());
+        return build;
 
     }
     public static Client dtoToClient(ClientFormDto clientFormDto){
-        return Client.builder()
-                .name(clientFormDto.getName())
-                .password(clientFormDto.getPassword())
-                .surname(clientFormDto.getSurname())
+        Client build = Client.builder()
+
                 .city(clientFormDto.getCity())
                 .postCode(clientFormDto.getPostCode())
                 .street(clientFormDto.getStreet())
                 .email(clientFormDto.getEmail())
                 .build();
-
+        build.setName(clientFormDto.getName());
+        build.setSurname(clientFormDto.getSurname());
+        build.setPassword(clientFormDto.getPassword());
+return build;
     }
 }
