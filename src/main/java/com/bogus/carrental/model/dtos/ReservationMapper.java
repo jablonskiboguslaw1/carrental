@@ -1,11 +1,13 @@
 package com.bogus.carrental.model.dtos;
 
+import com.bogus.carrental.model.Car;
+import com.bogus.carrental.model.Client;
 import com.bogus.carrental.model.Reservation;
 
 public class ReservationMapper {
 
-private ReservationMapper(){}
-
+    private ReservationMapper() {
+    }
 
 
     public static ReservationDto mapToReservationDto(Reservation reservation) {
@@ -18,10 +20,20 @@ private ReservationMapper(){}
                         .reservationEnd(reservation.getReservationEnd())
                         .client(ClientMapper.clientToDto(reservation.getClient()))
                         .car(CarMapper.mapToCarDto(reservation.getCar()))
-                       .carRental(CarRentalMapper.mapToDto(reservation.getCarRental()))
-                       .carReturn(CarReturnMapper.mapToDto(reservation.getCarReturn()))
+                        .carRental(CarRentalMapper.mapToDto(reservation.getCarRental()))
+                        .carReturn(CarReturnMapper.mapToDto(reservation.getCarReturn()))
                         .build();
     }
 
+
+
+    public static Reservation mapDtoFormToReservation(ReservationFormDto reservationFormDto, Car car, Client client) {
+        return Reservation.builder()
+                .reservationStart(reservationFormDto.getReservationStart())
+                .reservationEnd(reservationFormDto.getReservationEnd())
+                .car(car)
+                .client(client).build();
+
+    }
 
 }

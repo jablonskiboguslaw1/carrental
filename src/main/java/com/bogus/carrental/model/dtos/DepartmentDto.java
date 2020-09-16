@@ -1,4 +1,5 @@
-package com.bogus.carrental.model;
+package com.bogus.carrental.model.dtos;
+
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class DepartmentDto {
-private Long id;
+    private Long id;
     private String name;
     private String city;
 

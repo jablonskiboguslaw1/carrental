@@ -1,7 +1,6 @@
 package com.bogus.carrental.model.dtos;
 
 import com.bogus.carrental.model.Department;
-import com.bogus.carrental.model.DepartmentDto;
 
 public class DepartmentMapper {
     private DepartmentMapper() {

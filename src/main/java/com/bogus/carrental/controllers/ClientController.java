@@ -1,6 +1,5 @@
 package com.bogus.carrental.controllers;
 
-import com.bogus.carrental.model.Client;
 import com.bogus.carrental.model.dtos.ClientDto;
 import com.bogus.carrental.model.dtos.ClientFormDto;
 import com.bogus.carrental.service.ClientService;
@@ -45,7 +44,7 @@ public class ClientController {
     @PatchMapping("")
     @ResponseBody
     public ClientDto updateClient(@RequestBody ClientDto clientDto,
-                            @RequestParam(name = "id") Long id) {
+                                  @RequestParam(name = "id") Long id) {
 
         return clientService.updateClient(id, clientDto);
 

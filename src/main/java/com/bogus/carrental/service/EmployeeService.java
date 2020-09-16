@@ -9,7 +9,6 @@ import com.bogus.carrental.model.dtos.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,7 +23,7 @@ public class EmployeeService {
 
 
     public List<EmployeeDto> findAll() {
-    return  employeeRepository.findAll().stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
+        return employeeRepository.findAll().stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
 
     }
 
@@ -43,7 +42,8 @@ public class EmployeeService {
         employeeRepository.save(employee);
         return EmployeeMapper.mapToDto(employee);
     }
-@Transactional
+
+    @Transactional
     public EmployeeDto chooseManager(Long id) {
 
         Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
@@ -52,7 +52,8 @@ public class EmployeeService {
 
         return EmployeeMapper.mapToDto(employee);
     }
-    public boolean deleteById(Long id){
+
+    public boolean deleteById(Long id) {
         employeeRepository.deleteById(id);
         return true;
     }

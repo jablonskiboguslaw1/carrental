@@ -27,8 +27,8 @@ public class Employee {
     private String name;
     private String surname;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Position position;
-   @ManyToOne
+    @ManyToOne
     private Department department;
 }

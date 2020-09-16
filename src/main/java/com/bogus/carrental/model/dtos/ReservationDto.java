@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
 @Getter
 @Setter
 @Builder
@@ -17,6 +18,6 @@ public class ReservationDto {
     private ClientDto client;
     private LocalDate reservationStart;
     private LocalDate reservationEnd;
-   private CarReturnDto carReturn;
+    private CarReturnDto carReturn;
     private CarRentalDto carRental;
 }

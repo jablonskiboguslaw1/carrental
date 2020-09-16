@@ -1,7 +1,7 @@
 package com.bogus.carrental.controllers;
 
-import com.bogus.carrental.model.Reservation;
 import com.bogus.carrental.model.dtos.ReservationDto;
+import com.bogus.carrental.model.dtos.ReservationFormDto;
 import com.bogus.carrental.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +11,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
+
+
 public class ReservationController {
 
 
@@ -35,9 +37,9 @@ public class ReservationController {
 
     @PostMapping("")
     @ResponseBody
-    public ReservationDto createReservation(@RequestBody Reservation reservation) {
+    public ReservationDto createReservation(@RequestBody ReservationFormDto reservationFormDto) {
 
-        return reservationService.createReservation(reservation);
+        return reservationService.createReservation(reservationFormDto);
 
     }
 

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-@CrossOrigin
+
+@CrossOrigin(origins ="http://localhost:3000" )
 @RestController
 @RequestMapping("/cars")
 @RequiredArgsConstructor
@@ -17,25 +18,15 @@ public class CarController {
 
     private final CarService carService;
 
-
-    @GetMapping("/service")
-    public List<Car> showAllCarsDetails() {
-
-        return carService.showAllCarsDetails();
-
-    }
-
-
     @GetMapping("")
     public List<CarDto> showAllCars() {
 
         return carService.showAllCarsDtos();
-
     }
 
 
-    @GetMapping("/details")
-    public CarDto showCarDtoById(@RequestParam(name = "id") Long id) {
+    @GetMapping("/{id}")
+    public CarDto showCarDtoById(@PathVariable(name = "id") Long id) {
 
         return carService.showCarDtoById(id);
 
@@ -51,9 +42,9 @@ public class CarController {
     }
 
 
-    @PatchMapping("")
+    @PatchMapping("/{id}")
     @ResponseBody
-    public Car updateCar(@RequestBody CarUpdateDto carUpdateDto, @RequestParam(name = "id") Long id) {
+    public CarDto updateCar(@RequestBody CarUpdateDto carUpdateDto, @PathVariable(name = "id") Long id) {
 
         return carService.updateCar(id, carUpdateDto);
 
@@ -61,35 +52,30 @@ public class CarController {
 
     @PatchMapping("/department")
     @ResponseBody
-    public Car setCarDepartment(@RequestParam(name="car")Long car, @RequestParam(name = "id") Long id) {
+    public CarDto setCarDepartment(@RequestParam(name = "car") Long car, @RequestParam(name = "id") Long id) {
 
-        return carService.setCarDepartment(id,car);
+        return carService.setCarDepartment(id, car);
 
     }
 
-
-    @DeleteMapping("")
-    public void deleteCar(@RequestParam(name = "id") Long id) {
+    @CrossOrigin
+    @DeleteMapping("/{id}")
+    public void deleteCar( @PathVariable(name = "id") Long id) {
 
         carService.deleteCarById(id);
 
     }
 
 
-    @GetMapping("/details/service")
-    public Car showCarById(@RequestParam(name = "id") Long id) {
-
-        return carService.showCarById(id);
-
-    }
     @GetMapping("/department")
     public List<CarDto> showAllCarsByDepartment(@RequestParam Long departmentId) {
 
         return carService.showAllCarsDtosByDepartment(departmentId);
 
     }
+
     @GetMapping("/dates")
-    public List<Car> showAllCarsAvailable(
+    public List<CarDto> showAllCarsAvailable(
             @RequestParam(name = "start") String start,
             @RequestParam(name = "end") String end) {
 
