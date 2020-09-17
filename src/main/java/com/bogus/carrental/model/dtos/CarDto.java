@@ -1,12 +1,12 @@
 package com.bogus.carrental.model.dtos;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarDto {
     private Long id;
     private String mark;

@@ -1,14 +1,12 @@
 package com.bogus.carrental.database;
 
-import com.bogus.carrental.model.Client;
-import com.bogus.carrental.model.User;
+import com.bogus.carrental.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.Optional;
 
 
-public interface UserRepository<T extends User> extends JpaRepository<T, Long> {
+public interface UserRepository<T extends UserEntity> extends JpaRepository<T, Long> {
 
     Optional<T> findByName(String name);
 
