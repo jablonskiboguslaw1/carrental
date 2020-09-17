@@ -1,7 +1,6 @@
 package com.bogus.carrental.controllers;
 
-import com.bogus.carrental.database.UserRepository;
-import com.bogus.carrental.model.User;
+import com.bogus.carrental.model.UserEntity;
 import com.bogus.carrental.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,7 @@ private final UserService userService;
 
 
     @GetMapping
-    public User isUser(String name){
+    public UserEntity isUser(String name){
         return userService.findByName(name);
 
     }

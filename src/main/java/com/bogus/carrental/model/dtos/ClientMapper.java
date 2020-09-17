@@ -3,6 +3,7 @@ package com.bogus.carrental.model.dtos;
 
 import com.bogus.carrental.model.Client;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -48,7 +49,7 @@ public class ClientMapper {
                 .build();
         build.setName(clientFormDto.getName());
         build.setSurname(clientFormDto.getSurname());
-        build.setPassword(clientFormDto.getPassword());
+        build.setPassword(new BCryptPasswordEncoder().encode(clientFormDto.getPassword()));
 return build;
     }
 }

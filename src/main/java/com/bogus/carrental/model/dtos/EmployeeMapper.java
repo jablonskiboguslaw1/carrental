@@ -2,6 +2,7 @@ package com.bogus.carrental.model.dtos;
 
 import com.bogus.carrental.model.Department;
 import com.bogus.carrental.model.Employee;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EmployeeMapper {
     private EmployeeMapper() {
@@ -26,7 +27,7 @@ public class EmployeeMapper {
                 .build();
         build.setName(employeeDto.getName());
         build.setSurname(employeeDto.getSurname());
-        build.setPassword(employeeDto.getPassword());
+        build.setPassword(new BCryptPasswordEncoder().encode(employeeDto.getPassword()));
         return build;
     }
 
