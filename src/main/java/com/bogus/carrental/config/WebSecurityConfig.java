@@ -9,10 +9,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 import javax.sql.DataSource;
@@ -23,14 +24,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
     private final DataSource dataSource;
-    private final ObjectMapper objectMapper;
-    private final RestAuthenticationFailureHandler authenticationFailureHandler;
-    private final RestAuthenticationSuccessHandler authenticationSuccessHandler;
+
+    private ObjectMapper objectMapper;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-         auth.userDetailsService(userDetailsService);//.passwordEncoder(passwordEncoder);
-      //  auth.jdbcAuthentication().dataSource(dataSource);
+        // auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        auth.jdbcAuthentication().dataSource(dataSource);
+
     }
 
     @Override
@@ -47,9 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/cars").permitAll()
                 .antMatchers(HttpMethod.POST, "/cars").permitAll()//hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.GET, "/department").hasAuthority("EMPLOYEE")
+
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(authenticationFilter())
+
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
@@ -57,8 +60,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public JsonObjectAuthenticationFilter authenticationFilter() throws Exception {
         JsonObjectAuthenticationFilter filter = new JsonObjectAuthenticationFilter(objectMapper);
 
+
         filter.setAuthenticationSuccessHandler(authenticationSuccessHandler); // 1
         filter.setAuthenticationFailureHandler(authenticationFailureHandler); // 2
+
         filter.setAuthenticationManager(super.authenticationManager()); // 3
         return filter;
     }

@@ -16,7 +16,7 @@ import java.util.List;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class Employee extends User{
+public class Employee extends UserEntity {
 
     @OneToMany(mappedBy = "employee")
     List<CarRental> rentals;

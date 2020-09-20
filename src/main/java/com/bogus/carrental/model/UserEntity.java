@@ -14,7 +14,7 @@ import javax.persistence.Inheritance;
 @Entity
 @AllArgsConstructor
 
-public abstract class User {
+public abstract class UserEntity {
 
     @Id
     @GeneratedValue

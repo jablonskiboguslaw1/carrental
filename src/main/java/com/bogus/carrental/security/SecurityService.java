@@ -23,16 +23,18 @@ public class SecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+
         System.out.println(name);
         UserEntity user = userRepository.findByName(name).orElseThrow(()->new UsernameNotFoundException("no User"));
         System.out.println(user.toString());
+
         SimpleGrantedAuthority authority;
         if (user instanceof Employee) {
             authority = new SimpleGrantedAuthority(((Employee) user).getPosition().toString());
         } else {
             authority = new SimpleGrantedAuthority("CLIENT");
         }
-        System.out.println(user);
+
         return new User(
                 user.getName(),
                 user.getPassword(),
