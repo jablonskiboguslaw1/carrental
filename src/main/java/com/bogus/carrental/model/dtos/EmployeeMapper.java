@@ -19,7 +19,7 @@ public class EmployeeMapper {
 
     }
 
-<<<<<<< HEAD
+
     public static Employee mapDtoToEmployee(EmployeeDto employeeDto, Department department) {
         Employee build = Employee.builder()
                 .position(employeeDto.getPosition())
@@ -29,15 +29,6 @@ public class EmployeeMapper {
         build.setSurname(employeeDto.getSurname());
         build.setPassword(new BCryptPasswordEncoder().encode(employeeDto.getPassword()));
         return build;
-=======
-    public static Employee mapDtoToEmployee(EmployeeDto employeeDto, Department department){
-       return  Employee.builder()
-                 .name(employeeDto.getName())
-                 .surname(employeeDto.getSurname())
-                 .position(employeeDto.getPosition())
-                 .department(department)
-                 .build();
->>>>>>> parent of 957e9bd... inheritanece looks good
-    }
 
+    }
 }

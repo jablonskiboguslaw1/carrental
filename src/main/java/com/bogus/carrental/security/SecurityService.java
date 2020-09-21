@@ -1,8 +1,7 @@
+/*
 package com.bogus.carrental.security;
 
-import com.bogus.carrental.database.UserRepository;
 import com.bogus.carrental.model.Employee;
-import com.bogus.carrental.model.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -37,3 +36,4 @@ public class SecurityService implements UserDetailsService {
     }
 }
 
+*/

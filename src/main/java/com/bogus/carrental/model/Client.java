@@ -3,6 +3,8 @@ package com.bogus.carrental.model;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -12,12 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-<<<<<<< HEAD
-public class Client extends UserEntity {
-
-=======
 public class Client {
->>>>>>> parent of 957e9bd... inheritanece looks good
 
     @Id
     @GeneratedValue

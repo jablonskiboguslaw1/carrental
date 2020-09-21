@@ -13,18 +13,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
-<<<<<<< HEAD
-public class Employee extends UserEntity {
 
-=======
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
->>>>>>> parent of 957e9bd... inheritanece looks good
     @OneToMany(mappedBy = "employee")
     List<CarRental> rentals;
     @OneToMany(mappedBy = "employee")
@@ -36,4 +29,5 @@ public class Employee {
     private Position position;
    @ManyToOne
     private Department department;
+    private String password;
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+
 public class EmployeeDto {
 
     private Long id;
@@ -15,4 +16,5 @@ public class EmployeeDto {
     private String department;
     private String name;
     private String surname;
+    private String password;
 }

@@ -48,13 +48,6 @@ public class ClientMapper {
                 .street(clientFormDto.getStreet())
                 .email(clientFormDto.getEmail())
                 .build();
-<<<<<<< HEAD
-        build.setName(clientFormDto.getName());
-        build.setSurname(clientFormDto.getSurname());
-        build.setPassword(new BCryptPasswordEncoder().encode(clientFormDto.getPassword()));
-return build;
-=======
 
->>>>>>> parent of 957e9bd... inheritanece looks good
     }
 }
