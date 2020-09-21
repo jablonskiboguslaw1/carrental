@@ -13,18 +13,21 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
-public class Employee extends UserEntity {
 
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @OneToMany(mappedBy = "employee")
     List<CarRental> rentals;
     @OneToMany(mappedBy = "employee")
     List<CarReturn> returns;
+    private String name;
+    private String surname;
 
     @Enumerated (EnumType.STRING)
     private Position position;
    @ManyToOne
     private Department department;
+    private String password;
 }
