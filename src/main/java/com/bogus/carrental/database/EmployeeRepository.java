@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface EmployeeRepository  extends UserRepository<Employee > {
+public interface EmployeeRepository  extends JpaRepository<Employee,Long > {
     @Query("Select e from Employee e where e.department.Id=?1")
    List<Employee> findByDepartment(Long id);
 }

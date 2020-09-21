@@ -12,9 +12,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+<<<<<<< HEAD
 public class Client extends UserEntity {
 
+=======
+public class Client {
+>>>>>>> parent of 957e9bd... inheritanece looks good
 
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    private String surname;
+    private String password;
     private String email;
     private String city;
     private String street;
