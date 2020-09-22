@@ -33,7 +33,7 @@ public class CarReturnService {
     @Transactional
     public CarReturnDto makeReturn(CarReturnFormDto carReturn, Long employeeId, Long reservationId) {
         Reservation reservationById = reservationService.getReservationById(reservationId);
-        reservationById.setCarReturn(CarReturnMapper.mapDtoToCarReturn(carReturn,employeeRepository.findById(employeeId).orElseThrow(NoSuchElementException::new)));
+        reservationById.setCarReturn(CarReturnMapper.mapDtoToCarReturn(carReturn, employeeRepository.findById(employeeId).orElseThrow(NoSuchElementException::new)));
         return CarReturnMapper.mapToDto(reservationById.getCarReturn());
 
 
@@ -47,7 +47,8 @@ public class CarReturnService {
         carReturnRepository.deleteById(id);
         return true;
     }
-@Transactional
+
+    @Transactional
     public boolean deleteReturnByReservationId(Long id) {
         reservationRepository.findById(id).orElseThrow(NoSuchElementException::new).setCarReturn(null);
         return true;

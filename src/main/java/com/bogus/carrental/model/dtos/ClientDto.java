@@ -1,12 +1,9 @@
 package com.bogus.carrental.model.dtos;
 
 
-import com.bogus.carrental.model.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Setter
 @Getter

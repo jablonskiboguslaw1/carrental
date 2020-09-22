@@ -5,11 +5,12 @@ import com.bogus.carrental.model.Employee;
 
 public class CarReturnMapper {
 
-    private CarReturnMapper(){}
+    private CarReturnMapper() {
+    }
 
 
-    public static CarReturnDto mapToDto(CarReturn carReturn){
-        if(carReturn==null)
+    public static CarReturnDto mapToDto(CarReturn carReturn) {
+        if (carReturn == null)
             return null;
         return CarReturnDto.builder()
                 .id(carReturn.getId())
@@ -20,10 +21,10 @@ public class CarReturnMapper {
     }
 
     public static CarReturn mapDtoToCarReturn(CarReturnFormDto carReturnFormDto, Employee employee) {
-       return CarReturn.builder()
+        return CarReturn.builder()
                 .comments(carReturnFormDto.getComments())
                 .employee(employee).
-                additionalPayments(carReturnFormDto.getAdditionalPayments()).build();
+                        additionalPayments(carReturnFormDto.getAdditionalPayments()).build();
 
     }
 

@@ -1,4 +1,4 @@
-package com.bogus.carrental.controllers;
+package com.bogus.carrental.security;
 
 import lombok.Getter;
 

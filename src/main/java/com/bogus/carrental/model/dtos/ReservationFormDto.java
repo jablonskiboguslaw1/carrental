@@ -4,10 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+
 @Builder
 @Data
 public class ReservationFormDto {
-
 
 
     private LocalDate dateOfReservation;

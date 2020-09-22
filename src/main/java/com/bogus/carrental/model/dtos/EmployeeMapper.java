@@ -5,17 +5,18 @@ import com.bogus.carrental.model.Employee;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EmployeeMapper {
-     private EmployeeMapper(){}
+    private EmployeeMapper() {
+    }
 
 
-    public static EmployeeDto mapToDto(Employee employee){
+    public static EmployeeDto mapToDto(Employee employee) {
 
-         return EmployeeDto.builder()
-                 .id(employee.getId())
-                 .name(employee.getName())
-                 .surname(employee.getSurname())
-                 .position(employee.getPosition())
-                 .department(employee.getDepartment().getName()).build();
+        return EmployeeDto.builder()
+                .id(employee.getId())
+                .name(employee.getName())
+                .surname(employee.getSurname())
+                .position(employee.getPosition())
+                .department(employee.getDepartment().getName()).build();
 
     }
 

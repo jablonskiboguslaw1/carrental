@@ -1,5 +1,6 @@
 package com.bogus.carrental.controllers;
 
+import com.bogus.carrental.security.LoginCredentials;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

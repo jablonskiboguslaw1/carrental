@@ -4,8 +4,8 @@ import com.bogus.carrental.model.Reservation;
 
 public class ReservationMapper {
 
-private ReservationMapper(){}
-
+    private ReservationMapper() {
+    }
 
 
     public static ReservationDto mapToReservationDto(Reservation reservation) {
@@ -18,8 +18,8 @@ private ReservationMapper(){}
                         .reservationEnd(reservation.getReservationEnd())
                         .client(ClientMapper.clientToDto(reservation.getClient()))
                         .car(CarMapper.mapToCarDto(reservation.getCar()))
-                       .carRental(CarRentalMapper.mapToDto(reservation.getCarRental()))
-                       .carReturn(CarReturnMapper.mapToDto(reservation.getCarReturn()))
+                        .carRental(CarRentalMapper.mapToDto(reservation.getCarRental()))
+                        .carReturn(CarReturnMapper.mapToDto(reservation.getCarReturn()))
                         .build();
     }
 

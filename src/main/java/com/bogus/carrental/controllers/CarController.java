@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/cars")
@@ -61,9 +62,9 @@ public class CarController {
 
     @PatchMapping("/department")
     @ResponseBody
-    public Car setCarDepartment(@RequestParam(name="car")Long car, @RequestParam(name = "id") Long id) {
+    public Car setCarDepartment(@RequestParam(name = "car") Long car, @RequestParam(name = "id") Long id) {
 
-        return carService.setCarDepartment(id,car);
+        return carService.setCarDepartment(id, car);
 
     }
 
@@ -82,12 +83,14 @@ public class CarController {
         return carService.showCarById(id);
 
     }
+
     @GetMapping("/department")
     public List<CarDto> showAllCarsByDepartment(@RequestParam Long departmentId) {
 
         return carService.showAllCarsDtosByDepartment(departmentId);
 
     }
+
     @GetMapping("/dates")
     public List<Car> showAllCarsAvailable(
             @RequestParam(name = "start") String start,

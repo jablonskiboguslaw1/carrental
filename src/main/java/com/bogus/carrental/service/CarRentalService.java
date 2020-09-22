@@ -6,7 +6,6 @@ import com.bogus.carrental.model.CarRental;
 import com.bogus.carrental.model.Reservation;
 import com.bogus.carrental.model.dtos.CarRentalDto;
 import com.bogus.carrental.model.dtos.CarRentalMapper;
-import com.bogus.carrental.model.dtos.ReservationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,26 +26,28 @@ public class CarRentalService {
 
         return carRentalRepository.findAll().stream().map(CarRentalMapper::mapToDto).collect(Collectors.toList());
     }
-@Transactional
+
+    @Transactional
     public CarRentalDto makeRental(CarRental carRental, Long reservationId) {
-    Reservation reservationById = reservationService.getReservationById(reservationId);
-    reservationById.setCarRental(carRental);
+        Reservation reservationById = reservationService.getReservationById(reservationId);
+        reservationById.setCarRental(carRental);
 
         return CarRentalMapper.mapToDto(carRental);
     }
 
-    public CarRentalDto  findFindById(Long id) {
+    public CarRentalDto findFindById(Long id) {
 
-       return CarRentalMapper.mapToDto(carRentalRepository.findById(id).orElseThrow(NoSuchFieldError::new));
+        return CarRentalMapper.mapToDto(carRentalRepository.findById(id).orElseThrow(NoSuchFieldError::new));
     }
 
     public boolean deleteRentalById(Long id) {
 
-     carRentalRepository.deleteById(id);
-     return true;
+        carRentalRepository.deleteById(id);
+        return true;
 
 
     }
+
     @Transactional
     public boolean deleteRentalByReservationId(Long id) {
         reservationRepository.findById(id).orElseThrow(NoSuchElementException::new).setCarRental(null);

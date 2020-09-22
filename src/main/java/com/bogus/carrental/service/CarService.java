@@ -21,7 +21,7 @@ public class CarService {
 
 
     private final CarRepository carRepository;
-private final DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
     public List<Car> showAllCarsDetails() {
 
@@ -79,18 +79,19 @@ private final DepartmentService departmentService;
 
         Car updatedCar = carById.orElseThrow(NoSuchElementException::new);
 
-            if (carUpdateDto.getPayForDay() != null)
-                updatedCar.setPayForDay(carUpdateDto.getPayForDay());
-            if (carUpdateDto.getMileage() != null)
-                updatedCar.setMileage(carUpdateDto.getMileage());
-            if (carUpdateDto.getColor() != null)
-                updatedCar.setColor(carUpdateDto.getColor());
-            carRepository.save(updatedCar);
+        if (carUpdateDto.getPayForDay() != null)
+            updatedCar.setPayForDay(carUpdateDto.getPayForDay());
+        if (carUpdateDto.getMileage() != null)
+            updatedCar.setMileage(carUpdateDto.getMileage());
+        if (carUpdateDto.getColor() != null)
+            updatedCar.setColor(carUpdateDto.getColor());
+        carRepository.save(updatedCar);
 
         return updatedCar;
 
     }
-@Transactional
+
+    @Transactional
     public Car setCarDepartment(Long id, Long car) {
         Car updatedCar = carRepository.findById(car).orElseThrow(NoSuchElementException::new);
         updatedCar.setDepartment(departmentService.findById(id));
@@ -98,7 +99,7 @@ private final DepartmentService departmentService;
     }
 
     public List<CarDto> showAllCarsDtosByDepartment(Long id) {
-      return   carRepository.findCarsByDepartment(id).stream().map(CarMapper::mapToCarDto).collect(Collectors.toList());
+        return carRepository.findCarsByDepartment(id).stream().map(CarMapper::mapToCarDto).collect(Collectors.toList());
 
     }
 

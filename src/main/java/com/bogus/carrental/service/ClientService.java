@@ -52,20 +52,20 @@ public class ClientService {
         Optional<Client> clientById = clientRepository.findById(id);
         Client updatedClient = null;
 
-            updatedClient = clientById.orElseThrow(NoSuchElementException::new);
-            if (clientDto.getName() != null)
-                updatedClient.setName(clientDto.getName());
-            if (clientDto.getSurname() != null)
-                updatedClient.setSurname(clientDto.getSurname());
-            if (clientDto.getCity() != null)
-                updatedClient.setCity(clientDto.getCity());
-            if (clientDto.getPostCode() != null)
-                updatedClient.setPostCode(clientDto.getPostCode());
-            if (clientDto.getStreet() != null)
-                updatedClient.setStreet(clientDto.getStreet());
-            if (clientDto.getEmail() != null)
-                updatedClient.setEmail(clientDto.getEmail());
-            clientRepository.save(updatedClient);
+        updatedClient = clientById.orElseThrow(NoSuchElementException::new);
+        if (clientDto.getName() != null)
+            updatedClient.setName(clientDto.getName());
+        if (clientDto.getSurname() != null)
+            updatedClient.setSurname(clientDto.getSurname());
+        if (clientDto.getCity() != null)
+            updatedClient.setCity(clientDto.getCity());
+        if (clientDto.getPostCode() != null)
+            updatedClient.setPostCode(clientDto.getPostCode());
+        if (clientDto.getStreet() != null)
+            updatedClient.setStreet(clientDto.getStreet());
+        if (clientDto.getEmail() != null)
+            updatedClient.setEmail(clientDto.getEmail());
+        clientRepository.save(updatedClient);
 
         return ClientMapper.clientToDto(updatedClient);
     }

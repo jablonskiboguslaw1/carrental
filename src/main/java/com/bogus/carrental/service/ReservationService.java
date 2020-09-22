@@ -78,8 +78,9 @@ public class ReservationService {
 
 
     }
-    public Reservation getReservationById(Long id){
-        return  reservationRepository.findById(id).orElseThrow(NoSuchElementException::new);
+
+    public Reservation getReservationById(Long id) {
+        return reservationRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
 

@@ -1,7 +1,5 @@
 package com.bogus.carrental.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,9 +23,9 @@ public class Employee {
     private String name;
     private String surname;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Position position;
-   @ManyToOne
+    @ManyToOne
     private Department department;
     private String password;
 }

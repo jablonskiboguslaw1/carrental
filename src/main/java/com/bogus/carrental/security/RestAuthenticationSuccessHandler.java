@@ -1,8 +1,7 @@
-package com.bogus.carrental.config;
+package com.bogus.carrental.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +15,15 @@ import java.io.IOException;
 import java.util.Date;
 
 @Component
-//@RequiredArgsConstructor
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-   // @Value("${jwt.expirationTime}")
     private final long expirationTime;
-   // @Value("${jwt.secret}")
     private final String secret;
 
-    public RestAuthenticationSuccessHandler( @Value("${jwt.expirationTime}")long expirationTime,@Value("${jwt.secret}") String secret) {
+    public RestAuthenticationSuccessHandler(@Value("${jwt.expirationTime}") long expirationTime, @Value("${jwt.secret}") String secret) {
         this.expirationTime = expirationTime;
         this.secret = secret;
     }
-
 
 
     @Override

@@ -7,9 +7,10 @@ import java.util.stream.Collectors;
 
 public class CarMapper {
 
-    private CarMapper(){}
+    private CarMapper() {
+    }
 
-    public static CarDto mapToCarDto(Car car){
+    public static CarDto mapToCarDto(Car car) {
         return CarDto.builder()
                 .id(car.getId())
                 .mark(car.getMark())
@@ -22,12 +23,13 @@ public class CarMapper {
                 .build();
     }
 
-    public static  List<CarDto> mapToCarDtos(List<Car> cars){
+    public static List<CarDto> mapToCarDtos(List<Car> cars) {
 
         return cars.stream().map(car -> mapToCarDto(car)).collect(Collectors.toList());
 
     }
-    public static Car mapDtoToCar(CarDto car){
+
+    public static Car mapDtoToCar(CarDto car) {
         return Car.builder()
                 .id(car.getId())
                 .mark(car.getMark())
@@ -39,7 +41,6 @@ public class CarMapper {
                 .productionYear(car.getProductionYear())
                 .build();
     }
-
 
 
 }

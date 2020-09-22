@@ -2,7 +2,7 @@ package com.bogus.carrental.service;
 
 import com.bogus.carrental.database.DepartmentRepository;
 import com.bogus.carrental.model.Department;
-import com.bogus.carrental.model.DepartmentDto;
+import com.bogus.carrental.model.dtos.DepartmentDto;
 import com.bogus.carrental.model.dtos.DepartmentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class DepartmentService {
     private final DepartmentRepository departmentRepository;
 
     public Department findById(Long id) {
-       return departmentRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        return departmentRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     public List<DepartmentDto> getDepartmentDtos() {
@@ -29,7 +29,6 @@ public class DepartmentService {
         Department department = departmentRepository.save(DepartmentMapper.mapDtoToDepartment(departmentDto));
         return DepartmentMapper.mapToDepartmentDto(department);
     }
-
 
 
 }
