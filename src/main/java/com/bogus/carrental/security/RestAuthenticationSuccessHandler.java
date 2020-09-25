@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -29,11 +30,17 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        UserDetails principal = (UserDetails) authentication.getPrincipal();
+        UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
         String token = JWT.create()
                 .withSubject(principal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
                 .sign(Algorithm.HMAC256(secret));
-        response.addHeader("Authorization", "Bearer " + token);
+        response.getOutputStream().print("{" +
+                "\"id\": \"" + principal.getId() + "\",\n" +
+                "\"email\": \"" + principal.getEmail() + "\",\n" +
+                "\"username\": \"" + principal.getUsername() + "\",\n" +
+                "\"roles\": " + principal.getAuthorities().stream().map(l -> "\"" + l + "\"").collect(Collectors.toList()) + ",\n" +
+                "\"accessToken\": \"" + token + "\"}");
+        //  response.addHeader("Authorization", "Bearer " + token);
     }
 }

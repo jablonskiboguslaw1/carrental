@@ -73,7 +73,7 @@ public class CarService {
     }
 
 
-    public Car updateCar(Long id, CarUpdateDto carUpdateDto) {
+    public CarDto updateCar(Long id, CarUpdateDto carUpdateDto) {
 
         Optional<Car> carById = carRepository.findById(id);
 
@@ -87,15 +87,15 @@ public class CarService {
             updatedCar.setColor(carUpdateDto.getColor());
         carRepository.save(updatedCar);
 
-        return updatedCar;
+        return CarMapper.mapToCarDto(updatedCar);
 
     }
 
     @Transactional
-    public Car setCarDepartment(Long id, Long car) {
+    public CarDto setCarDepartment(Long id, Long car) {
         Car updatedCar = carRepository.findById(car).orElseThrow(NoSuchElementException::new);
         updatedCar.setDepartment(departmentService.findById(id));
-        return updatedCar;
+        return CarMapper.mapToCarDto(updatedCar);
     }
 
     public List<CarDto> showAllCarsDtosByDepartment(Long id) {
@@ -103,13 +103,13 @@ public class CarService {
 
     }
 
-    public List<Car> showAllCarsAvailable(LocalDate start1, LocalDate end1) {
+    public List<CarDto> showAllCarsAvailable(LocalDate start1, LocalDate end1) {
 
         return carRepository.findAllAvailableCars().stream().filter(
                 car -> car.getStatuses().stream().noneMatch(
                         carStatus ->
                                 ((carStatus.getStartDate().isBefore(end1)) &&
-                                        (carStatus.getEndDate().isAfter(start1)))))
+                                        (carStatus.getEndDate().isAfter(start1))))).map(CarMapper::mapToCarDto)
                 .collect(Collectors.toList());
 
     }

@@ -16,20 +16,21 @@ public class EmployeeMapper {
                 .name(employee.getName())
                 .surname(employee.getSurname())
                 .position(employee.getPosition())
+                .email(employee.getEmail())
                 .department(employee.getDepartment().getName()).build();
 
     }
 
 
     public static Employee mapDtoToEmployee(EmployeeDto employeeDto, Department department) {
-        Employee build = Employee.builder()
+        return Employee.builder()
                 .position(employeeDto.getPosition())
                 .department(department)
-                .build();
-        build.setName(employeeDto.getName());
-        build.setSurname(employeeDto.getSurname());
-        build.setPassword(new BCryptPasswordEncoder().encode(employeeDto.getPassword()));
-        return build;
+                .email(employeeDto.getEmail())
+                .name(employeeDto.getName())
+                .surname(employeeDto.getSurname())
+                .password(new BCryptPasswordEncoder().encode(employeeDto.getPassword())).build();
+
 
     }
 }

@@ -30,10 +30,15 @@ public class SecurityService implements UserDetailsService {
 
         Client client = clientRepository.findByName(name);
         if (client != null) {
-            return new UserDetails() {
+            return new UserDetailsImpl() {
                 @Override
                 public Collection<? extends GrantedAuthority> getAuthorities() {
                     return Collections.singleton(new SimpleGrantedAuthority("CLIENT"));
+                }
+
+                @Override
+                public Long getId() {
+                    return client.getId();
                 }
 
                 @Override
@@ -70,10 +75,20 @@ public class SecurityService implements UserDetailsService {
         } else {
             Employee employee = employeeRepository.findByName(name);
             if (employee != null) {
-                return new UserDetails() {
+                return new UserDetailsImpl() {
                     @Override
                     public Collection<? extends GrantedAuthority> getAuthorities() {
                         return Collections.singleton(new SimpleGrantedAuthority(employee.getPosition().toString()));
+                    }
+
+                    @Override
+                    public Long getId() {
+                        return employee.getId();
+                    }
+
+                    @Override
+                    public String getEmail() {
+                        return employee.getEmail();
                     }
 
                     @Override
