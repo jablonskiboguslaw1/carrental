@@ -7,7 +7,6 @@ import com.bogus.carrental.model.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,10 @@ public class SecurityService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String email) throws UsernameNotFoundException {
 
 
-        Client client = clientRepository.findByName(name);
+        Client client = clientRepository.findByEmail(email);
         if (client != null) {
             return new UserDetailsImpl() {
                 @Override
@@ -42,13 +41,28 @@ public class SecurityService implements UserDetailsService {
                 }
 
                 @Override
+                public String getEmail() {
+                    return client.getEmail();
+                }
+
+                @Override
+                public String getName() {
+                    return client.getName();
+                }
+
+                @Override
+                public String getSurname() {
+                    return client.getSurname();
+                }
+
+                @Override
                 public String getPassword() {
                     return client.getPassword();
                 }
 
                 @Override
                 public String getUsername() {
-                    return client.getName();
+                    return client.getEmail();
                 }
 
                 @Override
@@ -73,11 +87,12 @@ public class SecurityService implements UserDetailsService {
 
             };
         } else {
-            Employee employee = employeeRepository.findByName(name);
+            Employee employee = employeeRepository.findByEmail(email);
             if (employee != null) {
                 return new UserDetailsImpl() {
                     @Override
                     public Collection<? extends GrantedAuthority> getAuthorities() {
+                        System.out.println(employee.getPosition().toString());
                         return Collections.singleton(new SimpleGrantedAuthority(employee.getPosition().toString()));
                     }
 
@@ -90,7 +105,14 @@ public class SecurityService implements UserDetailsService {
                     public String getEmail() {
                         return employee.getEmail();
                     }
+                    public String getName() {
+                        return employee.getName();
+                    }
 
+                    @Override
+                    public String getSurname() {
+                        return employee.getSurname();
+                    }
                     @Override
                     public String getPassword() {
                         return employee.getPassword();
@@ -98,7 +120,7 @@ public class SecurityService implements UserDetailsService {
 
                     @Override
                     public String getUsername() {
-                        return employee.getName();
+                        return employee.getEmail();
                     }
 
                     @Override
@@ -121,7 +143,7 @@ public class SecurityService implements UserDetailsService {
                         return true;
                     }
                 };
-            } else throw new NoSuchElementException(name);
+            } else throw new NoSuchElementException(email);
         }
     }
 }
