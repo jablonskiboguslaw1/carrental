@@ -60,6 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/cars").hasAuthority("MANAGER")
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/client").permitAll()
+                .antMatchers("/client/**").permitAll()
                 .anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().formLogin().permitAll().and().addFilter(authenticationFilter())
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), securityService, secret)).exceptionHandling()

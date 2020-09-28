@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/client")
 @RequiredArgsConstructor
@@ -24,8 +24,8 @@ public class ClientController {
     }
 
 
-    @GetMapping("/details")
-    public ClientDto getClientById(@RequestParam(name = "id") Long id) {
+    @GetMapping("/{id}")
+    public ClientDto getClientById(@PathVariable Long id) {
 
         return clientService.showClientById(id);
 
@@ -41,10 +41,10 @@ public class ClientController {
     }
 
 
-    @PatchMapping("")
+    @PatchMapping("/{id}")
     @ResponseBody
     public ClientDto updateClient(@RequestBody ClientDto clientDto,
-                                  @RequestParam(name = "id") Long id) {
+                                  @PathVariable Long id) {
 
         return clientService.updateClient(id, clientDto);
 
