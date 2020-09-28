@@ -37,10 +37,12 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
                 .sign(Algorithm.HMAC256(secret));
         response.getOutputStream().print("{" +
                 "\"id\": \"" + principal.getId() + "\",\n" +
-                "\"email\": \"" + principal.getEmail() + "\",\n" +
+                "\"name\": \"" + principal.getName() + "\",\n" +
+                "\"surname\": \"" + principal.getSurname() + "\",\n" +
                 "\"username\": \"" + principal.getUsername() + "\",\n" +
                 "\"roles\": " + principal.getAuthorities().stream().map(l -> "\"" + l + "\"").collect(Collectors.toList()) + ",\n" +
                 "\"accessToken\": \"" + token + "\"}");
+
         //  response.addHeader("Authorization", "Bearer " + token);
     }
 }

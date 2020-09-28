@@ -7,13 +7,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+
 @Getter
 @Setter
 public class UserDetailsImpl implements UserDetails {
 
 
     private Long id;
-
+    private String name;
+    private String surname;
     private String username;
 
     private String email;
@@ -37,7 +39,8 @@ public class UserDetailsImpl implements UserDetails {
     public String getUsername() {
         return null;
     }
-    public Long getId(){
+
+    public Long getId() {
         return null;
     }
 
