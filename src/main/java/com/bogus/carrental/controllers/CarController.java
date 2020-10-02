@@ -45,7 +45,7 @@ public class CarController {
     }
 
 
-    @PatchMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseBody
     public CarDto  updateCar(@RequestBody CarUpdateDto carUpdateDto, @PathVariable  Long id) {
 
@@ -53,9 +53,9 @@ public class CarController {
 
     }
 
-    @PatchMapping("/department")
+    @PutMapping("/department/car/{id}")
     @ResponseBody
-    public CarDto setCarDepartment(@RequestParam(name = "car") Long car, @RequestParam(name = "id") Long id) {
+    public CarDto setCarDepartment(@RequestParam(name = "car") Long car, @PathVariable Long id) {
 
         return carService.setCarDepartment(id, car);
 

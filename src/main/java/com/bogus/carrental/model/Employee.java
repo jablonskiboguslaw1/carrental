@@ -29,4 +29,5 @@ public class Employee {
     @ManyToOne
     private Department department;
     private String password;
+    private boolean isActive;
 }

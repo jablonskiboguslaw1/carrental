@@ -2,6 +2,7 @@ package com.bogus.carrental.model.dtos;
 
 
 import com.bogus.carrental.model.Client;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,6 +34,7 @@ public class ClientMapper {
                 .city(clientDto.getCity())
                 .postCode(clientDto.getPostCode())
                 .street(clientDto.getStreet())
+                .isActive(clientDto.isActive())
                 .build();
 
     }
@@ -40,12 +42,13 @@ public class ClientMapper {
     public static Client dtoToClient(ClientFormDto clientFormDto) {
         return Client.builder()
                 .name(clientFormDto.getName())
-                .password(clientFormDto.getPassword())
+                .password(new BCryptPasswordEncoder().encode(clientFormDto.getPassword()))
                 .surname(clientFormDto.getSurname())
                 .city(clientFormDto.getCity())
                 .postCode(clientFormDto.getPostCode())
                 .street(clientFormDto.getStreet())
                 .email(clientFormDto.getEmail())
+                .isActive(true)
                 .build();
 
     }

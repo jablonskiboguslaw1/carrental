@@ -2,12 +2,13 @@ package com.bogus.carrental.controllers;
 
 import com.bogus.carrental.model.Reservation;
 import com.bogus.carrental.model.dtos.ReservationDto;
+import com.bogus.carrental.model.dtos.ReservationFormDto;
 import com.bogus.carrental.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
@@ -18,15 +19,24 @@ public class ReservationController {
 
 
     @GetMapping("")
-    public List<ReservationDto> showAllReservation() {
+    public List<ReservationDto> showAllReservations() {
 
         return reservationService.findAllReservations();
 
     }
 
+    @GetMapping("/client/{clientId}")
+    public List<ReservationDto> showClientReservations(@PathVariable long clientId) {
 
-    @GetMapping("/details")
-    public ReservationDto getReservationDetails(@RequestParam(name = "id") Long id) {
+        return reservationService.findClientsReservations(clientId);
+
+    }
+
+
+
+
+    @GetMapping("{id}")
+    public ReservationDto getReservationDetails(@PathVariable Long id) {
 
         return reservationService.showReservationById(id);
 
@@ -35,25 +45,25 @@ public class ReservationController {
 
     @PostMapping("")
     @ResponseBody
-    public ReservationDto createReservation(@RequestBody Reservation reservation) {
+    public ReservationDto createReservation(@RequestBody ReservationFormDto reservationFormDto) {
 
-        return reservationService.createReservation(reservation);
+        return reservationService.createReservation(reservationFormDto);
 
     }
 
 
-    @PatchMapping("")
+    @PutMapping("{id}")
     @ResponseBody
     public ReservationDto updateReservation(@RequestBody ReservationDto reservationDto,
-                                            @RequestParam(name = "id") Long id) {
+                                            @PathVariable Long id) {
 
         return reservationService.updateReservation(id, reservationDto);
 
     }
 
 
-    @DeleteMapping("")
-    public void deleteReservation(@RequestParam(name = "id") Long id) {
+    @DeleteMapping("{id}")
+    public void deleteReservation( @PathVariable Long id) {
 
         reservationService.deleteReservationById(id);
 

@@ -5,7 +5,6 @@ import com.bogus.carrental.database.EmployeeRepository;
 import com.bogus.carrental.database.ReservationRepository;
 import com.bogus.carrental.model.Reservation;
 import com.bogus.carrental.model.dtos.CarReturnDto;
-import com.bogus.carrental.model.dtos.CarReturnFormDto;
 import com.bogus.carrental.model.dtos.CarReturnMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class CarReturnService {
     }
 
     @Transactional
-    public CarReturnDto makeReturn(CarReturnFormDto carReturn, Long employeeId, Long reservationId) {
+    public CarReturnDto makeReturn(CarReturnDto carReturn, Long employeeId, Long reservationId) {
         Reservation reservationById = reservationService.getReservationById(reservationId);
         reservationById.setCarReturn(CarReturnMapper.mapDtoToCarReturn(carReturn, employeeRepository.findById(employeeId).orElseThrow(NoSuchElementException::new)));
         return CarReturnMapper.mapToDto(reservationById.getCarReturn());

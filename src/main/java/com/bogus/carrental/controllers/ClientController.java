@@ -19,7 +19,7 @@ public class ClientController {
     @GetMapping("")
     public List<ClientDto> showAllClients() {
 
-        return clientService.showAllClients();
+        return clientService.findAllActiveClients();
 
     }
 
@@ -41,19 +41,19 @@ public class ClientController {
     }
 
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseBody
-    public ClientDto updateClient(@RequestBody ClientDto clientDto,
+    public ClientDto updateClient(@RequestBody ClientFormDto clientFormDto,
                                   @PathVariable Long id) {
 
-        return clientService.updateClient(id, clientDto);
+        return clientService.updateClient(id, clientFormDto);
 
     }
 
-    @DeleteMapping("")
-    public void deleteClient(@RequestParam(name = "id") Long id) {
+    @DeleteMapping("/{id}")
+    public void deactivateClient(@PathVariable Long id) {
 
-        clientService.deleteClientById(id);
+        clientService.deactivateClientAccountById(id);
 
     }
 

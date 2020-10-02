@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class ReservationFormDto {
 
 
-    private LocalDate dateOfReservation;
+
     private Long car;
     private Long client;
     private LocalDate reservationStart;

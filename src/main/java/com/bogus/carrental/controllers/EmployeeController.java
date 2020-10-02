@@ -1,6 +1,5 @@
 package com.bogus.carrental.controllers;
 
-import com.bogus.carrental.model.Employee;
 import com.bogus.carrental.model.dtos.EmployeeDto;
 import com.bogus.carrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("employee")
@@ -20,16 +20,15 @@ public class EmployeeController {
     @GetMapping
     public List<EmployeeDto> getAllEmployees() {
         return employeeService.findAll();
-
     }
 
-    @GetMapping("/details")
-    public Employee getEmployeeById(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public EmployeeDto getEmployeeById(@PathVariable Long id) {
         return employeeService.findById(id);
     }
 
-    @GetMapping("/department")
-    List<EmployeeDto> getEmployeesByDepartmentId(@RequestParam Long id) {
+    @GetMapping("/department/{id}")
+    List<EmployeeDto> getEmployeesByDepartmentId(@PathVariable Long id) {
         return employeeService.findAllByDepartmentId(id);
     }
 
@@ -39,15 +38,18 @@ public class EmployeeController {
         return employeeService.addEmployee(employeeDto);
     }
 
-    @PatchMapping
-    public EmployeeDto chooseManager(@RequestParam Long id) {
-        return employeeService.chooseManager(id);
+    @PutMapping("{id}")
+    @ResponseBody
+    public EmployeeDto changeRights(@PathVariable Long id) {
+        return employeeService.changeRights(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
+    public void deactivateEmployeeById(@PathVariable Long id) {
+        employeeService.deactivateEmployeeAccountById(id);
 
-    public boolean deleteEmployeeById(@RequestParam Long id) {
-        return employeeService.deleteById(id);
+
+
     }
 
 }

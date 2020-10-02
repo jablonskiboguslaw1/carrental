@@ -1,8 +1,10 @@
 package com.bogus.carrental.service;
 
 import com.bogus.carrental.database.CarRentalRepository;
+import com.bogus.carrental.database.EmployeeRepository;
 import com.bogus.carrental.database.ReservationRepository;
 import com.bogus.carrental.model.CarRental;
+import com.bogus.carrental.model.Employee;
 import com.bogus.carrental.model.Reservation;
 import com.bogus.carrental.model.dtos.CarRentalDto;
 import com.bogus.carrental.model.dtos.CarRentalMapper;
@@ -21,18 +23,26 @@ public class CarRentalService {
     private final CarRentalRepository carRentalRepository;
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
+    private final EmployeeRepository employeeRepository;
 
     public List<CarRentalDto> findAll() {
 
         return carRentalRepository.findAll().stream().map(CarRentalMapper::mapToDto).collect(Collectors.toList());
     }
 
-    @Transactional
-    public CarRentalDto makeRental(CarRental carRental, Long reservationId) {
-        Reservation reservationById = reservationService.getReservationById(reservationId);
-        reservationById.setCarRental(carRental);
 
-        return CarRentalMapper.mapToDto(carRental);
+    public List<CarRentalDto> findAllByEmployee(Long id) {
+
+        return carRentalRepository.findAllByEmployee(id).stream().map(CarRentalMapper::mapToDto).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public CarRentalDto makeRental(CarRentalDto carRentalDto, Long reservationId) {
+        Reservation reservationById = reservationService.getReservationById(reservationId);
+        Employee employee = employeeRepository.findById(carRentalDto.getEmployeeId()).orElseThrow(NoSuchElementException::new);
+        reservationById.setCarRental(CarRentalMapper.mapDtoToCarRental(carRentalDto,employee));
+
+        return CarRentalMapper.mapToDto(reservationById.getCarRental());
     }
 
     public CarRentalDto findFindById(Long id) {

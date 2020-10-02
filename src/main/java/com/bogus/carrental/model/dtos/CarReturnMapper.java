@@ -20,7 +20,7 @@ public class CarReturnMapper {
                 .additionalPayments(carReturn.getAdditionalPayments()).build();
     }
 
-    public static CarReturn mapDtoToCarReturn(CarReturnFormDto carReturnFormDto, Employee employee) {
+    public static CarReturn mapDtoToCarReturn(CarReturnDto carReturnFormDto, Employee employee) {
         return CarReturn.builder()
                 .comments(carReturnFormDto.getComments())
                 .employee(employee).

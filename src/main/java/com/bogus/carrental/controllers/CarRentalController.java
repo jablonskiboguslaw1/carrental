@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rental")
@@ -16,30 +16,38 @@ public class CarRentalController {
     private final CarRentalService carRentalService;
 
 
-    @GetMapping("/service")
+    @GetMapping("")
     public List<CarRentalDto> getAllRental() {
 
         return carRentalService.findAll();
     }
 
-    @GetMapping("details")
-    public CarRentalDto getRentalById(@RequestParam Long id) {
+
+    @GetMapping("/empl/{id}")
+    public List<CarRentalDto> getAllRentalByEmployee(@PathVariable Long id) {
+
+        return carRentalService.findAllByEmployee(id);
+    }
+
+
+    @GetMapping("/{id}")
+    public CarRentalDto getRentalById(@PathVariable Long id) {
 
         return carRentalService.findFindById(id);
     }
 
 
-    @PostMapping("")
+    @PostMapping("/{id}")
     @ResponseBody
-    public CarRentalDto makeRental(@RequestBody CarRental carRental, @RequestParam Long reservationId) {
+    public CarRentalDto makeRental(@RequestBody CarRentalDto carRentalDto, @PathVariable Long reservationId) {
 
 
-        return carRentalService.makeRental(carRental, reservationId);
+        return carRentalService.makeRental(carRentalDto, reservationId);
 
     }
 
-    @DeleteMapping("")
-    public boolean deleteRentalById(@RequestParam Long reservationId) {
+    @DeleteMapping("/{reservationId}")
+    public boolean deleteRentalById(@PathVariable Long reservationId) {
         return carRentalService.deleteRentalByReservationId(reservationId);
     }
 

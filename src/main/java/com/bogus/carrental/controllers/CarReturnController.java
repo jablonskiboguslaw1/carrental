@@ -1,7 +1,6 @@
 package com.bogus.carrental.controllers;
 
 import com.bogus.carrental.model.dtos.CarReturnDto;
-import com.bogus.carrental.model.dtos.CarReturnFormDto;
 import com.bogus.carrental.service.CarReturnService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class CarReturnController {
     }
 
     @PostMapping("")
-    public CarReturnDto makeReturn(@RequestBody CarReturnFormDto carReturn, @RequestParam Long empl, @RequestParam Long reservationId) {
+    public CarReturnDto makeReturn(@RequestBody CarReturnDto carReturn, @RequestParam Long empl, @RequestParam Long reservationId) {
         return carReturnService.makeReturn(carReturn, empl, reservationId);
     }
 

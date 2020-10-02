@@ -2,6 +2,7 @@ package com.bogus.carrental.service;
 
 import com.bogus.carrental.database.DepartmentRepository;
 import com.bogus.carrental.database.EmployeeRepository;
+import com.bogus.carrental.model.Client;
 import com.bogus.carrental.model.Employee;
 import com.bogus.carrental.model.Position;
 import com.bogus.carrental.model.dtos.EmployeeDto;
@@ -23,38 +24,46 @@ public class EmployeeService {
 
 
     public List<EmployeeDto> findAll() {
-        return employeeRepository.findAll().stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
+        return employeeRepository.findAllByActiveIsTrue().stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
 
     }
 
-    public Employee findById(Long id) {
-        return employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    public EmployeeDto findById(Long id) {
+        return EmployeeMapper.mapToDto(employeeRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
 
     public List<EmployeeDto> findAllByDepartmentId(Long id) {
-        return employeeRepository.findByDepartment(id).stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
+        return employeeRepository.findByDepartmentAndActiveIsTrue(id).stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
     }
 
 
     public EmployeeDto addEmployee(EmployeeDto employeeDto) {
 
         Employee employee = EmployeeMapper.mapDtoToEmployee(employeeDto, departmentRepository.findByName(employeeDto.getDepartment()));
+        employee.setActive(true);
         employeeRepository.save(employee);
         return EmployeeMapper.mapToDto(employee);
     }
 
     @Transactional
-    public EmployeeDto chooseManager(Long id) {
+    public EmployeeDto changeRights(Long id) {
 
         Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
-        employee.setPosition(Position.MANAGER);
+        if (employee.getPosition().equals(Position.MANAGER)) {
+            employee.setPosition(Position.EMPLOYEE);
+        }else
+        if (employee.getPosition().equals(Position.EMPLOYEE)) {
+            employee.setPosition(Position.MANAGER);
+        }
 
         return EmployeeMapper.mapToDto(employee);
     }
 
-    public boolean deleteById(Long id) {
-        employeeRepository.deleteById(id);
-        return true;
+   @Transactional
+        public void deactivateEmployeeAccountById(Long id) {
+
+            Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
+            employee.setActive(!employee.isActive());
+        }
     }
-}
+

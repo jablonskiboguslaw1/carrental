@@ -28,4 +28,5 @@ public class Client {
     private String postCode;
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations;
+    private boolean isActive;
 }

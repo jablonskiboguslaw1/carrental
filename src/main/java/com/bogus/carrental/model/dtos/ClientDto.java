@@ -17,5 +17,6 @@ public class ClientDto {
     private String city;
     private String street;
     private String postCode;
+    private boolean isActive;
 
 }
