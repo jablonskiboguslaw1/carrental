@@ -1,6 +1,7 @@
 package com.bogus.carrental.model.dtos;
 
 import com.bogus.carrental.model.CarRental;
+import com.bogus.carrental.model.Employee;
 
 public class CarRentalMapper {
 
@@ -11,7 +12,16 @@ public class CarRentalMapper {
         return CarRentalDto.builder()
                 .id(carRental.getId())
                 .dateOfRental(carRental.getDateOfRental())
-                .employee(EmployeeMapper.mapToDto(carRental.getEmployee()))
+                .employeeId(carRental.getEmployee().getId())
                 .comments(carRental.getComments()).build();
+    }
+
+    public static CarRental mapDtoToCarRental(CarRentalDto carRental, Employee employee) {
+        return CarRental.builder()
+                .employee(employee)
+                .comments(carRental.getComments())
+
+                .build();
+
     }
 }

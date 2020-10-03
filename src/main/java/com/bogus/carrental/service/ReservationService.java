@@ -1,11 +1,11 @@
 package com.bogus.carrental.service;
 
+import com.bogus.carrental.database.CarRepository;
+import com.bogus.carrental.database.ClientRepository;
 import com.bogus.carrental.database.ReservationRepository;
+import com.bogus.carrental.model.Client;
 import com.bogus.carrental.model.Reservation;
-import com.bogus.carrental.model.dtos.CarMapper;
-import com.bogus.carrental.model.dtos.ClientMapper;
-import com.bogus.carrental.model.dtos.ReservationDto;
-import com.bogus.carrental.model.dtos.ReservationMapper;
+import com.bogus.carrental.model.dtos.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,8 @@ public class ReservationService {
 
 
     private final ReservationRepository reservationRepository;
+    private final ClientRepository clientRepository;
+    private final CarRepository carRepository;
 
 
     public List<ReservationDto> findAllReservations() {
@@ -31,8 +33,11 @@ public class ReservationService {
     }
 
 
-    public ReservationDto createReservation(Reservation reservation) {
-
+    public ReservationDto createReservation(ReservationFormDto reservationFormDto) {
+        Reservation reservation = ReservationMapper.mapDtoFormToReservation(
+                reservationFormDto,
+                carRepository.findById(reservationFormDto.getCar()).orElseThrow(NoSuchElementException::new),
+                clientRepository.findById(reservationFormDto.getClient()).orElseThrow(NoSuchElementException::new));
         reservationRepository.save(reservation);
         return ReservationMapper.mapToReservationDto(reservation);
 
@@ -84,4 +89,11 @@ public class ReservationService {
     }
 
 
+    public List<ReservationDto> findClientsReservations(Long clientId) {
+       return reservationRepository.findAllByClientId(clientId).stream().map(
+                ReservationMapper::mapToReservationDto)
+                .collect(Collectors.toList());
+
+
+    }
 }

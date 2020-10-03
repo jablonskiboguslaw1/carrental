@@ -1,5 +1,7 @@
 package com.bogus.carrental.model.dtos;
 
+import com.bogus.carrental.model.Car;
+import com.bogus.carrental.model.Client;
 import com.bogus.carrental.model.Reservation;
 
 public class ReservationMapper {
@@ -23,5 +25,12 @@ public class ReservationMapper {
                         .build();
     }
 
+    public static Reservation mapDtoFormToReservation(ReservationFormDto reservationFormDto, Car car, Client client) {
+        return Reservation.builder().client(client)
+                .car(car)
+                .reservationStart(reservationFormDto.getReservationStart())
+                .reservationEnd(reservationFormDto.getReservationEnd())
+                .build();
+    }
 
 }

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class CarRentalDto {
 
     private Long id;
-    private EmployeeDto employee;
+    private Long employeeId;
     private LocalDate dateOfRental;
     private String comments;
 }

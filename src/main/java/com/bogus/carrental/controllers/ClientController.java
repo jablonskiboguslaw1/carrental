@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/client")
 @RequiredArgsConstructor
@@ -19,13 +19,13 @@ public class ClientController {
     @GetMapping("")
     public List<ClientDto> showAllClients() {
 
-        return clientService.showAllClients();
+        return clientService.findAllActiveClients();
 
     }
 
 
-    @GetMapping("/details")
-    public ClientDto getClientById(@RequestParam(name = "id") Long id) {
+    @GetMapping("/{id}")
+    public ClientDto getClientById(@PathVariable Long id) {
 
         return clientService.showClientById(id);
 
@@ -41,19 +41,19 @@ public class ClientController {
     }
 
 
-    @PatchMapping("")
+    @PutMapping("/{id}")
     @ResponseBody
-    public ClientDto updateClient(@RequestBody ClientDto clientDto,
-                                  @RequestParam(name = "id") Long id) {
+    public ClientDto updateClient(@RequestBody ClientFormDto clientFormDto,
+                                  @PathVariable Long id) {
 
-        return clientService.updateClient(id, clientDto);
+        return clientService.updateClient(id, clientFormDto);
 
     }
 
-    @DeleteMapping("")
-    public void deleteClient(@RequestParam(name = "id") Long id) {
+    @DeleteMapping("/{id}")
+    public void deactivateClient(@PathVariable Long id) {
 
-        clientService.deleteClientById(id);
+        clientService.deactivateClientAccountById(id);
 
     }
 

@@ -1,16 +1,15 @@
 package com.bogus.carrental.controllers;
 
 import com.bogus.carrental.model.dtos.CarReturnDto;
-import com.bogus.carrental.model.dtos.CarReturnFormDto;
 import com.bogus.carrental.service.CarReturnService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/return")
+@RequestMapping("/returns")
 public class CarReturnController {
 
     private final CarReturnService carReturnService;
@@ -22,19 +21,19 @@ public class CarReturnController {
         return carReturnService.findAll();
     }
 
-    @PostMapping("")
-    public CarReturnDto makeReturn(@RequestBody CarReturnFormDto carReturn, @RequestParam Long empl, @RequestParam Long reservationId) {
-        return carReturnService.makeReturn(carReturn, empl, reservationId);
+    @PostMapping("{reservationId}")
+    public CarReturnDto makeReturn(@RequestBody CarReturnDto carReturn, @PathVariable Long reservationId) {
+        return carReturnService.makeReturn(carReturn, reservationId);
     }
 
-    @GetMapping("details")
-    public CarReturnDto getReturnById(@RequestParam Long id) {
+    @GetMapping("{id}")
+    public CarReturnDto getReturnById(@PathVariable Long id) {
 
         return carReturnService.findById(id);
     }
 
-    @DeleteMapping("")
-    public boolean deleteReturnByReservationId(@RequestParam Long id) {
+    @DeleteMapping("{id}")
+    public boolean deleteReturnByReservationId(@PathVariable Long id) {
         return carReturnService.deleteReturnByReservationId(id);
     }
 

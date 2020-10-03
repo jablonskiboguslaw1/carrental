@@ -7,6 +7,7 @@ import com.bogus.carrental.model.dtos.ClientFormDto;
 import com.bogus.carrental.model.dtos.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,9 +23,9 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
 
-    public List<ClientDto> showAllClients() {
+    public List<ClientDto> findAllActiveClients() {
 
-        return clientRepository.findAll().stream().map(ClientMapper::clientToDto).collect(Collectors.toList());
+        return clientRepository.findAllActive().stream().map(ClientMapper::clientToDto).collect(Collectors.toList());
 
     }
 
@@ -47,33 +48,33 @@ public class ClientService {
     }
 
 
-    public ClientDto updateClient(Long id, ClientDto clientDto) {
+    public ClientDto updateClient(Long id, ClientFormDto clientFormDto) {
 
         Optional<Client> clientById = clientRepository.findById(id);
         Client updatedClient = null;
 
         updatedClient = clientById.orElseThrow(NoSuchElementException::new);
-        if (clientDto.getName() != null)
-            updatedClient.setName(clientDto.getName());
-        if (clientDto.getSurname() != null)
-            updatedClient.setSurname(clientDto.getSurname());
-        if (clientDto.getCity() != null)
-            updatedClient.setCity(clientDto.getCity());
-        if (clientDto.getPostCode() != null)
-            updatedClient.setPostCode(clientDto.getPostCode());
-        if (clientDto.getStreet() != null)
-            updatedClient.setStreet(clientDto.getStreet());
-        if (clientDto.getEmail() != null)
-            updatedClient.setEmail(clientDto.getEmail());
+        if (clientFormDto.getName() != null)
+            updatedClient.setName(clientFormDto.getName());
+        if (clientFormDto.getSurname() != null)
+            updatedClient.setSurname(clientFormDto.getSurname());
+        if (clientFormDto.getCity() != null)
+            updatedClient.setCity(clientFormDto.getCity());
+        if (clientFormDto.getPostCode() != null)
+            updatedClient.setPostCode(clientFormDto.getPostCode());
+        if (clientFormDto.getStreet() != null)
+            updatedClient.setStreet(clientFormDto.getStreet());
+        if (clientFormDto.getEmail() != null)
+            updatedClient.setEmail(clientFormDto.getEmail());
         clientRepository.save(updatedClient);
 
         return ClientMapper.clientToDto(updatedClient);
     }
 
+@Transactional
+    public void deactivateClientAccountById(Long id) {
 
-    public void deleteClientById(Long id) {
-
-        clientRepository.deleteById(id);
-
+        Client client = clientRepository.findById(id).orElseThrow(NoSuchElementException::new);
+client.setActive(!client.isActive());
     }
 }
