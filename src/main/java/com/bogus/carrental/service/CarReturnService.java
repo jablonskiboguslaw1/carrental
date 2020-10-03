@@ -30,9 +30,9 @@ public class CarReturnService {
     }
 
     @Transactional
-    public CarReturnDto makeReturn(CarReturnDto carReturn, Long employeeId, Long reservationId) {
+    public CarReturnDto makeReturn(CarReturnDto carReturnDto, Long reservationId) {
         Reservation reservationById = reservationService.getReservationById(reservationId);
-        reservationById.setCarReturn(CarReturnMapper.mapDtoToCarReturn(carReturn, employeeRepository.findById(employeeId).orElseThrow(NoSuchElementException::new)));
+        reservationById.setCarReturn(CarReturnMapper.mapDtoToCarReturn(carReturnDto, employeeRepository.findById(carReturnDto.getEmployeeId()).orElseThrow(NoSuchElementException::new)));
         return CarReturnMapper.mapToDto(reservationById.getCarReturn());
 
 

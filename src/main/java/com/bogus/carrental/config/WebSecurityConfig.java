@@ -56,7 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
-
                 .antMatchers(HttpMethod.POST, "/cars").hasAuthority("MANAGER")
                 .antMatchers(HttpMethod.GET,"/employee").hasAnyAuthority("MANAGER","EMPLOYEE")
                 .antMatchers(HttpMethod.POST,"/employee").hasAnyAuthority("MANAGER")
@@ -65,7 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/reservation/**").authenticated()
                 .antMatchers("/rentals").authenticated()
                 .antMatchers("/rental/**").authenticated()
-
+                .antMatchers("/returns").authenticated()
+                .antMatchers("/returns/**").authenticated()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/client").permitAll()

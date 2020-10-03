@@ -1,6 +1,5 @@
 package com.bogus.carrental.controllers;
 
-import com.bogus.carrental.model.CarRental;
 import com.bogus.carrental.model.dtos.CarRentalDto;
 import com.bogus.carrental.service.CarRentalService;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +35,8 @@ public class CarRentalController {
         return carRentalService.findFindById(id);
     }
 
-
-    @PostMapping("/{id}")
+    @CrossOrigin
+    @PostMapping("/{reservationId}")
     @ResponseBody
     public CarRentalDto makeRental(@RequestBody CarRentalDto carRentalDto, @PathVariable Long reservationId) {
 

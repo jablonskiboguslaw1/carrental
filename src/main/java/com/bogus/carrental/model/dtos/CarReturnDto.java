@@ -13,10 +13,10 @@ public class CarReturnDto {
 
 
     private Long id;
-    private EmployeeDto employee;
+    private Long employeeId;
     private LocalDate dateOfReturn;
     private String comments;
-    private double additionalPayments;
+    private String additionalPayments;
 
 }
 

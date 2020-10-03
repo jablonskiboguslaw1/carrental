@@ -20,8 +20,7 @@ public class CarRentalMapper {
         return CarRental.builder()
                 .employee(employee)
                 .comments(carRental.getComments())
-                .dateOfRental(carRental.getDateOfRental())
-                .id(carRental.getId())
+
                 .build();
 
     }

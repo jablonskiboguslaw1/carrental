@@ -15,16 +15,16 @@ public class CarReturnMapper {
         return CarReturnDto.builder()
                 .id(carReturn.getId())
                 .dateOfReturn(carReturn.getDateOfReturn())
-                .employee(EmployeeMapper.mapToDto(carReturn.getEmployee()))
+                .employeeId(carReturn.getEmployee().getId())
                 .comments(carReturn.getComments())
-                .additionalPayments(carReturn.getAdditionalPayments()).build();
+                .additionalPayments(carReturn.getAdditionalPayments().toString()).build();
     }
 
     public static CarReturn mapDtoToCarReturn(CarReturnDto carReturnFormDto, Employee employee) {
         return CarReturn.builder()
                 .comments(carReturnFormDto.getComments())
                 .employee(employee).
-                        additionalPayments(carReturnFormDto.getAdditionalPayments()).build();
+                        additionalPayments(Double.parseDouble(carReturnFormDto.getAdditionalPayments())).build();
 
     }
 

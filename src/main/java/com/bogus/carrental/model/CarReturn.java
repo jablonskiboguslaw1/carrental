@@ -26,7 +26,7 @@ public class CarReturn {
     @CreationTimestamp
     private LocalDate dateOfReturn;
     private String comments;
-    private double additionalPayments;
+    private Double additionalPayments;
 
 }
 
