@@ -40,21 +40,17 @@ public class CarRentalService {
     public CarRentalDto makeRental(CarRentalDto carRentalDto, Long reservationId) {
         Reservation reservationById = reservationService.getReservationById(reservationId);
         Employee employee = employeeRepository.findById(carRentalDto.getEmployeeId()).orElseThrow(NoSuchElementException::new);
-        reservationById.setCarRental(CarRentalMapper.mapDtoToCarRental(carRentalDto,employee));
-
+        reservationById.setCarRental(CarRentalMapper.mapDtoToCarRental(carRentalDto, employee));
         return CarRentalMapper.mapToDto(reservationById.getCarRental());
     }
 
     public CarRentalDto findFindById(Long id) {
-
         return CarRentalMapper.mapToDto(carRentalRepository.findById(id).orElseThrow(NoSuchFieldError::new));
     }
 
     public boolean deleteRentalById(Long id) {
-
         carRentalRepository.deleteById(id);
         return true;
-
 
     }
 

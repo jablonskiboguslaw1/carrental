@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class CarRentalController {
         return carRentalService.findFindById(id);
     }
 
-    @CrossOrigin
+
     @PostMapping("/{reservationId}")
     @ResponseBody
     public CarRentalDto makeRental(@RequestBody CarRentalDto carRentalDto, @PathVariable Long reservationId) {

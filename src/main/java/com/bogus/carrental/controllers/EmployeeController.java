@@ -49,7 +49,6 @@ public class EmployeeController {
         employeeService.deactivateEmployeeAccountById(id);
 
 
-
     }
 
 }

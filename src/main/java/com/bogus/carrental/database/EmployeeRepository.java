@@ -11,9 +11,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByDepartmentAndActiveIsTrue(Long id);
 
     Employee findByEmail(String email);
+
     boolean existsByEmail(String email);
 
     @Query("Select e from Employee e where e.isActive=true")
-    List<Employee>findAllByActiveIsTrue();
+    List<Employee> findAllByActiveIsTrue();
 
 }

@@ -2,6 +2,7 @@ package com.bogus.carrental.controllers;
 
 import com.bogus.carrental.model.Car;
 import com.bogus.carrental.model.dtos.CarDto;
+import com.bogus.carrental.model.dtos.CarStatusDto;
 import com.bogus.carrental.model.dtos.CarUpdateDto;
 import com.bogus.carrental.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class CarController {
 
 
     @GetMapping("/{id}")
-    public CarDto showCarDtoById( @PathVariable  Long id) {
+    public CarDto showCarDtoById(@PathVariable Long id) {
 
         return carService.showCarDtoById(id);
 
@@ -47,7 +48,7 @@ public class CarController {
 
     @PutMapping("{id}")
     @ResponseBody
-    public CarDto  updateCar(@RequestBody CarUpdateDto carUpdateDto, @PathVariable  Long id) {
+    public CarDto updateCar(@RequestBody CarUpdateDto carUpdateDto, @PathVariable Long id) {
 
         return carService.updateCar(id, carUpdateDto);
 
@@ -62,16 +63,17 @@ public class CarController {
     }
 
 
-    @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable  Long id) {
+    @PutMapping("/status")
+    @ResponseBody
+    public CarStatusDto blockCar(@RequestBody CarStatusDto status) {
 
-        carService.deleteCarById(id);
+      return  carService.blockCarById(status);
 
     }
 
 
-    @GetMapping("/department")
-    public List<CarDto> showAllCarsByDepartment(@RequestParam Long departmentId) {
+    @GetMapping("/department/{departmentId}")
+    public List<CarDto> showAllCarsByDepartment(@PathVariable Long departmentId) {
 
         return carService.showAllCarsDtosByDepartment(departmentId);
 

@@ -82,7 +82,7 @@ public class SecurityService implements UserDetailsService {
 
                 @Override
                 public boolean isEnabled() {
-                    return true;
+                    return client.isActive();
                 }
 
             };
@@ -92,7 +92,7 @@ public class SecurityService implements UserDetailsService {
                 return new UserDetailsImpl() {
                     @Override
                     public Collection<? extends GrantedAuthority> getAuthorities() {
-                        System.out.println(employee.getPosition().toString());
+
                         return Collections.singleton(new SimpleGrantedAuthority(employee.getPosition().toString()));
                     }
 
@@ -105,6 +105,7 @@ public class SecurityService implements UserDetailsService {
                     public String getEmail() {
                         return employee.getEmail();
                     }
+
                     public String getName() {
                         return employee.getName();
                     }
@@ -113,6 +114,7 @@ public class SecurityService implements UserDetailsService {
                     public String getSurname() {
                         return employee.getSurname();
                     }
+
                     @Override
                     public String getPassword() {
                         return employee.getPassword();
@@ -140,7 +142,7 @@ public class SecurityService implements UserDetailsService {
 
                     @Override
                     public boolean isEnabled() {
-                        return true;
+                        return employee.isActive();
                     }
                 };
             } else throw new NoSuchElementException(email);
