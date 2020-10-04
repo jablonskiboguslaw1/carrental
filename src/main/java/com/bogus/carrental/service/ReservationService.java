@@ -3,8 +3,7 @@ package com.bogus.carrental.service;
 import com.bogus.carrental.database.CarRepository;
 import com.bogus.carrental.database.ClientRepository;
 import com.bogus.carrental.database.ReservationRepository;
-import com.bogus.carrental.model.Client;
-import com.bogus.carrental.model.Reservation;
+import com.bogus.carrental.model.*;
 import com.bogus.carrental.model.dtos.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ClientRepository clientRepository;
     private final CarRepository carRepository;
+    private final CarStatusService carStatusService;
 
 
     public List<ReservationDto> findAllReservations() {
@@ -34,12 +34,22 @@ public class ReservationService {
 
 
     public ReservationDto createReservation(ReservationFormDto reservationFormDto) {
+        Car car = carRepository.findById(reservationFormDto.getCar()).orElseThrow(NoSuchElementException::new);
         Reservation reservation = ReservationMapper.mapDtoFormToReservation(
-                reservationFormDto,
-                carRepository.findById(reservationFormDto.getCar()).orElseThrow(NoSuchElementException::new),
+                reservationFormDto,car,
                 clientRepository.findById(reservationFormDto.getClient()).orElseThrow(NoSuchElementException::new));
         reservationRepository.save(reservation);
+
+        CarStatus carStatus = new CarStatus();
+
+        carStatus.setStartDate(reservationFormDto.getReservationStart());
+        carStatus.setEndDate(reservationFormDto.getReservationEnd());
+        carStatus.setStatus(Status.RENTED);
+
+        carStatusService.updateStatuses(carStatus,car);
         return ReservationMapper.mapToReservationDto(reservation);
+
+
 
     }
 
@@ -77,7 +87,6 @@ public class ReservationService {
     public ReservationDto showReservationById(Long id) {
 
         Optional<Reservation> reservationById = reservationRepository.findById(id);
-
         return ReservationMapper.mapToReservationDto(
                 reservationById.orElseThrow(NoSuchElementException::new));
 
@@ -90,7 +99,7 @@ public class ReservationService {
 
 
     public List<ReservationDto> findClientsReservations(Long clientId) {
-       return reservationRepository.findAllByClientId(clientId).stream().map(
+        return reservationRepository.findAllByClientId(clientId).stream().map(
                 ReservationMapper::mapToReservationDto)
                 .collect(Collectors.toList());
 

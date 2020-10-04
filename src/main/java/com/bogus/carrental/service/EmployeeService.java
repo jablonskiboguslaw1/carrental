@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 
 public class EmployeeService {
+
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
 
@@ -28,9 +29,11 @@ public class EmployeeService {
 
     }
 
+
     public EmployeeDto findById(Long id) {
         return EmployeeMapper.mapToDto(employeeRepository.findById(id).orElseThrow(NoSuchElementException::new));
     }
+
 
     public List<EmployeeDto> findAllByDepartmentId(Long id) {
         return employeeRepository.findByDepartmentAndActiveIsTrue(id).stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());
@@ -45,25 +48,26 @@ public class EmployeeService {
         return EmployeeMapper.mapToDto(employee);
     }
 
+
     @Transactional
     public EmployeeDto changeRights(Long id) {
 
         Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
         if (employee.getPosition().equals(Position.MANAGER)) {
             employee.setPosition(Position.EMPLOYEE);
-        }else
-        if (employee.getPosition().equals(Position.EMPLOYEE)) {
+        } else if (employee.getPosition().equals(Position.EMPLOYEE)) {
             employee.setPosition(Position.MANAGER);
         }
 
         return EmployeeMapper.mapToDto(employee);
     }
 
-   @Transactional
-        public void deactivateEmployeeAccountById(Long id) {
 
-            Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
-            employee.setActive(!employee.isActive());
-        }
+    @Transactional
+    public void deactivateEmployeeAccountById(Long id) {
+
+        Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        employee.setActive(!employee.isActive());
     }
+}
 

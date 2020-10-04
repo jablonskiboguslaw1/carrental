@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/client")
@@ -30,7 +31,12 @@ public class ClientController {
         return clientService.showClientById(id);
 
     }
+    @GetMapping("/username/{username}")
+    public ClientDto getClientByUsername(@PathVariable String username) {
 
+        return clientService.showClientByUsername(username);
+
+    }
 
     @PostMapping("")
     @ResponseBody

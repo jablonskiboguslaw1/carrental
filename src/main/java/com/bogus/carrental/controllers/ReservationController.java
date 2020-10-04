@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
@@ -31,8 +32,6 @@ public class ReservationController {
         return reservationService.findClientsReservations(clientId);
 
     }
-
-
 
 
     @GetMapping("{id}")
@@ -63,7 +62,7 @@ public class ReservationController {
 
 
     @DeleteMapping("{id}")
-    public void deleteReservation( @PathVariable Long id) {
+    public void deleteReservation(@PathVariable Long id) {
 
         reservationService.deleteReservationById(id);
 

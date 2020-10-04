@@ -1,17 +1,18 @@
 package com.bogus.carrental.model.dtos;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
-
-@Builder
-@Data
-public class ReservationFormDto {
+@Getter
+@Setter
+@AllArgsConstructor
+public class CarStatusDto {
 
 
     private Long car;
-    private Long client;
     private LocalDate reservationStart;
     private LocalDate reservationEnd;
+    private String status;
 }

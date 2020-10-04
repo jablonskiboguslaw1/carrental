@@ -1,8 +1,6 @@
 package com.bogus.carrental.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +9,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class CarStatus {
 
     @Id
@@ -23,4 +23,5 @@ public class CarStatus {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
+
 }

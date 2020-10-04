@@ -24,9 +24,7 @@ public class ClientService {
 
 
     public List<ClientDto> findAllActiveClients() {
-
         return clientRepository.findAllActive().stream().map(ClientMapper::clientToDto).collect(Collectors.toList());
-
     }
 
 
@@ -71,10 +69,13 @@ public class ClientService {
         return ClientMapper.clientToDto(updatedClient);
     }
 
-@Transactional
+    @Transactional
     public void deactivateClientAccountById(Long id) {
-
         Client client = clientRepository.findById(id).orElseThrow(NoSuchElementException::new);
-client.setActive(!client.isActive());
+        client.setActive(!client.isActive());
+    }
+
+    public ClientDto showClientByUsername(String username) {
+       return ClientMapper.clientToDto(clientRepository.findByEmail(username));
     }
 }
