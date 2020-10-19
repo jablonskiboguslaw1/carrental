@@ -1,6 +1,5 @@
 package com.bogus.carrental.controllers;
 
-import com.bogus.carrental.model.Car;
 import com.bogus.carrental.model.dtos.CarDto;
 import com.bogus.carrental.model.dtos.CarStatusDto;
 import com.bogus.carrental.model.dtos.CarUpdateDto;
@@ -67,7 +66,7 @@ public class CarController {
     @ResponseBody
     public CarStatusDto blockCar(@RequestBody CarStatusDto status) {
 
-      return  carService.blockCarById(status);
+        return carService.blockCarById(status);
 
     }
 

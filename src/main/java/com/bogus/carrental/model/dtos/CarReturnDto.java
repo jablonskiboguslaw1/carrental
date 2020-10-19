@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -16,7 +17,7 @@ public class CarReturnDto {
     private Long employeeId;
     private LocalDate dateOfReturn;
     private String comments;
-    private String additionalPayments;
+    private BigDecimal additionalPayments;
 
 }
 

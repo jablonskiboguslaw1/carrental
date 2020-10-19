@@ -3,6 +3,8 @@ package com.bogus.carrental.model.dtos;
 import com.bogus.carrental.model.CarReturn;
 import com.bogus.carrental.model.Employee;
 
+import java.math.BigDecimal;
+
 public class CarReturnMapper {
 
     private CarReturnMapper() {
@@ -17,14 +19,14 @@ public class CarReturnMapper {
                 .dateOfReturn(carReturn.getDateOfReturn())
                 .employeeId(carReturn.getEmployee().getId())
                 .comments(carReturn.getComments())
-                .additionalPayments(carReturn.getAdditionalPayments().toString()).build();
+                .additionalPayments(carReturn.getAdditionalPayments()).build();
     }
 
     public static CarReturn mapDtoToCarReturn(CarReturnDto carReturnFormDto, Employee employee) {
         return CarReturn.builder()
                 .comments(carReturnFormDto.getComments())
                 .employee(employee).
-                        additionalPayments(Double.parseDouble(carReturnFormDto.getAdditionalPayments())).build();
+                        additionalPayments(carReturnFormDto.getAdditionalPayments()).build();
 
     }
 

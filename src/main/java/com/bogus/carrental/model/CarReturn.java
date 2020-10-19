@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -26,7 +27,7 @@ public class CarReturn {
     @CreationTimestamp
     private LocalDate dateOfReturn;
     private String comments;
-    private Double additionalPayments;
+    private BigDecimal additionalPayments;
 
 }
 

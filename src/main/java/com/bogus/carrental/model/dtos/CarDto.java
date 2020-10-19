@@ -2,6 +2,8 @@ package com.bogus.carrental.model.dtos;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Builder
@@ -15,5 +17,5 @@ public class CarDto {
     private Long mileage;
     private String color;
     private String productionYear;
-    private Double payForDay;
+    private BigDecimal payForDay;
 }

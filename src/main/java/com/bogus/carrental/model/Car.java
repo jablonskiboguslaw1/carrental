@@ -3,6 +3,7 @@ package com.bogus.carrental.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Car {
     private Long mileage;
     private String color;
     private String productionYear;
-    private Double payForDay;
+    private BigDecimal payForDay;
     @OneToMany(mappedBy = "car")
 
 

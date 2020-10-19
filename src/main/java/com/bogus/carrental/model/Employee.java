@@ -22,6 +22,7 @@ public class Employee {
     List<CarReturn> returns;
     private String name;
     private String surname;
+    @Column(unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)
