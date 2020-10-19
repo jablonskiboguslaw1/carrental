@@ -142,7 +142,7 @@ public class SecurityService implements UserDetailsService {
 
                     @Override
                     public boolean isEnabled() {
-                        return employee.isActive();
+                        return true;
                     }
                 };
             } else throw new NoSuchElementException(email);

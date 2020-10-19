@@ -1,5 +1,6 @@
 package com.bogus.carrental.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class Department {
 
     @Id
@@ -27,4 +29,9 @@ public class Department {
     private String name;
     private String city;
 
+
+    public Department(int i, String city ,String name) {
+
+
+    }
 }

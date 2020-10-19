@@ -2,10 +2,7 @@ package com.bogus.carrental.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -22,6 +19,7 @@ public class Client {
     private String name;
     private String surname;
     private String password;
+    @Column(unique = true)
     private String email;
     private String city;
     private String street;

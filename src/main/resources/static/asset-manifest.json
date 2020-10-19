@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d31aa9bb.chunk.css",
+    "main.js": "/static/js/main.58722e39.chunk.js",
+    "main.js.map": "/static/js/main.58722e39.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ddced75f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ddced75f.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.556b444a.chunk.js": "/static/js/2.556b444a.chunk.js",
+    "static/js/2.556b444a.chunk.js.map": "/static/js/2.556b444a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f9ba326f5e17a3a8193c081ad47788ac.js": "/precache-manifest.f9ba326f5e17a3a8193c081ad47788ac.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/css/main.d31aa9bb.chunk.css.map": "/static/css/main.d31aa9bb.chunk.css.map",
+    "static/js/2.556b444a.chunk.js.LICENSE.txt": "/static/js/2.556b444a.chunk.js.LICENSE.txt",
+    "static/media/Team.jpg": "/static/media/Team.8370db3b.jpg",
+    "static/media/accessdenied.jpg": "/static/media/accessdenied.2332b3d9.jpg",
+    "static/media/car1.jpg": "/static/media/car1.e9039c57.jpg",
+    "static/media/clients.jpg": "/static/media/clients.185ce475.jpg",
+    "static/media/index.css": "/static/media/nissan-skyline.caf2575a.jpg",
+    "static/media/reservaton.jpg": "/static/media/reservaton.358e8421.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ddced75f.js",
+    "static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.556b444a.chunk.js",
+    "static/css/main.d31aa9bb.chunk.css",
+    "static/js/main.58722e39.chunk.js"
+  ]
+}

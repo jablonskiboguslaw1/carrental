@@ -6,10 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("department")
+@RequestMapping("/department")
 public class DepartmentController {
     private final DepartmentService departmentService;
 

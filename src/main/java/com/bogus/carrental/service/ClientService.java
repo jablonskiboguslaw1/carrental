@@ -76,6 +76,10 @@ public class ClientService {
     }
 
     public ClientDto showClientByUsername(String username) {
-       return ClientMapper.clientToDto(clientRepository.findByEmail(username));
+        Client  clientByEmail = clientRepository.findByEmail(username);
+       if  ( clientByEmail!=null) {
+           return ClientMapper.clientToDto(clientByEmail) ;}
+        else {throw  new NoSuchElementException();}
+
     }
 }
