@@ -24,8 +24,8 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
-
-/*TODO    Delete on production*/
+/*
+*//*TODO    Delete on production*//*
     @PostConstruct
     public void initSuperUser() {
         Department department = new Department();
@@ -43,7 +43,7 @@ public class EmployeeService {
 
         employeeRepository.save(superUser);
 
-    }
+    }*/
 
     public List<EmployeeDto> findAll() {
         return employeeRepository.findAllByActiveIsTrue().stream().map(EmployeeMapper::mapToDto).collect(Collectors.toList());

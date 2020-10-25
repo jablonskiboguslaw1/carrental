@@ -1,10 +1,6 @@
 package com.bogus.carrental.config;
 
-import com.bogus.carrental.security.JsonObjectAuthenticationFilter;
-import com.bogus.carrental.security.JwtAuthorizationFilter;
-import com.bogus.carrental.security.RestAuthenticationFailureHandler;
-import com.bogus.carrental.security.RestAuthenticationSuccessHandler;
-import com.bogus.carrental.security.SecurityService;
+import com.bogus.carrental.security.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.lang.reflect.Method;
-import java.util.Arrays;
 
 @Configuration
 
@@ -88,6 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationManager(super.authenticationManager());
         return filter;
     }
+
+
 
 
 }
